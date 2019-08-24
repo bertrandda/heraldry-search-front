@@ -1,0 +1,113 @@
+em {
+  background: cyan;
+  font-style: normal;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  padding: 0.5rem 1rem;
+  background-image: linear-gradient(to right, #8e43e7, #00aeff);
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header-title {
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+.header-title::after {
+  content: ' ▸ ';
+  padding: 0 0.5rem;
+}
+
+.header-subtitle {
+  font-size: 1.2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.search-panel {
+  display: flex;
+}
+
+.search-panel__filters {
+  flex: 1;
+}
+
+.search-panel__results {
+  flex: 3;
+}
+
+.searchbox {
+  margin-bottom: 2rem;
+}
+
+.ais-Hits-item {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+.emblem-container {
+  display: flex;
+  /* flex-wrap: wrap; */
+}
+
+.emblem-image-container {
+  flex: 1;
+  position: relative;
+  text-align: center;
+}
+
+.emblem-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: calc(100% - 30px);
+  max-height: calc(100% - 30px);
+}
+
+.emblem-info-container {
+  flex: 2;
+  height: 7em;
+}
+
+.emblem-title {
+  flex: 0 0 100%;
+  font-size: 0.9rem;
+}
+
+.emblem-description {
+  /* flex: 0 0 calc(100% - 200px); */
+  /* flex: 0 0 100%; */
+  max-height: 5em;
+  overflow: hidden;
+  margin: 0px;
+  font-size: 0.9rem;
+  text-align: justify;
+}
+
+.emblem-description-more {
+  margin: 0;
+  text-align: center;
+}
+
+.pagination {
+  margin: 2rem auto;
+  text-align: center;
+}
