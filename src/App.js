@@ -6,6 +6,7 @@ import {
   Hits,
   SearchBox,
   Pagination,
+  PoweredBy,
 } from 'react-instantsearch-dom';
 import PropTypes from 'prop-types';
 import './App.css';
@@ -18,40 +19,59 @@ const searchClient = algoliasearch(
 class App extends Component {
   render() {
     return (
-      <div>
+      <InstantSearch searchClient={searchClient} indexName="emblems">
         <header className="header">
-          <h1 className="header-title">
-            <a href="/">hearaldry-front-search</a>
-          </h1>
-          <p className="header-subtitle">
-            using{' '}
-            <a href="https://github.com/algolia/react-instantsearch">
-              React InstantSearch
-            </a>
-          </p>
+          <div className="header-title-container">
+            <h1 className="header-title">Armorial de France</h1>
+            <p className="header-subtitle">Villes, villages et familles</p>
+          </div>
+          <SearchBox
+            className="searchbox"
+            translations={{
+              placeholder: 'Parti, de gueules, famille...',
+            }}
+            submit={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 18 18"
+              >
+                <g
+                  fill="none"
+                  fillRule="evenodd"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.67"
+                  transform="translate(1 1)"
+                >
+                  <circle cx="7.11" cy="7.11" r="7.11" />
+                  <path d="M16 16l-3.87-3.87" />
+                </g>
+              </svg>
+            }
+          />
+          <PoweredBy
+            translations={{
+              searchBy: 'by',
+            }}
+          />
         </header>
 
         <div className="container">
-          <InstantSearch searchClient={searchClient} indexName="emblems">
-            <div className="search-panel">
-              <div className="search-panel__results">
-                <Configure hitsPerPage={5} />
-                <SearchBox
-                  className="searchbox"
-                  translations={{
-                    placeholder: 'De gueules...',
-                  }}
-                />
-                <Hits hitComponent={Hit} />
+          <div className="search-panel">
+            <div className="search-panel__results">
+              <Configure hitsPerPage={5} />
+              <Hits hitComponent={Hit} />
 
-                <div className="pagination">
-                  <Pagination />
-                </div>
+              <div className="pagination">
+                <Pagination />
               </div>
             </div>
-          </InstantSearch>
+          </div>
         </div>
-      </div>
+      </InstantSearch>
     );
   }
 }
