@@ -8,7 +8,7 @@ em {
   flex-direction: column;
   position: relative;
   align-items: center;
-  min-height: 50px;
+  min-height: 150px;
   padding: 0.5rem 1rem;
   background: linear-gradient(rgba(114, 91, 83, 0.4), rgba(50, 25, 17, 0.6)),
     url(./assets/cover.jpg);
@@ -140,6 +140,7 @@ em {
   margin: 0px;
   font-size: 0.9rem;
   text-align: justify;
+  line-height: 18px;
 }
 
 .emblem-description-more {

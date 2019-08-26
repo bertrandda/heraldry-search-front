@@ -19,7 +19,10 @@ const searchClient = algoliasearch(
 class App extends Component {
   render() {
     return (
-      <InstantSearch searchClient={searchClient} indexName="emblems">
+      <InstantSearch
+        searchClient={searchClient}
+        indexName={process.env.REACT_APP_ALGOLIA_INDEX}
+      >
         <header className="header">
           <div className="header-title-container">
             <h1 className="header-title">Armorial de France</h1>
