@@ -55,11 +55,7 @@ class App extends Component {
               </svg>
             }
           />
-          <PoweredBy
-            translations={{
-              searchBy: 'by',
-            }}
-          />
+          <PoweredBy />
         </header>
 
         <div className="container">

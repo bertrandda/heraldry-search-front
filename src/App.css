@@ -37,7 +37,7 @@ em {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  padding-top: 4rem;
+  padding-top: 5rem;
 }
 
 .search-panel {
@@ -50,6 +50,7 @@ em {
 
 .search-panel__results {
   flex: 3;
+  max-width: 100%;
 }
 
 .searchbox {
@@ -88,15 +89,17 @@ em {
 
 .ais-PoweredBy {
   position: absolute;
-  transform: translateY(50%);
+  transform: translateY(330%);
   bottom: 0;
-  right: 0;
-  margin-right: 8%;
+}
+
+.ais-Hits-list {
+  margin-left: 0;
 }
 
 .ais-Hits-item {
   width: 100%;
-  margin-bottom: 1rem;
+  margin: 0 0 2rem 0;
   padding: 0;
   border: 0;
   box-shadow: none;
