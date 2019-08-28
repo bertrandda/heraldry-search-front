@@ -61,7 +61,7 @@ class App extends Component {
         <div className="container">
           <div className="search-panel">
             <div className="search-panel__results">
-              <Configure hitsPerPage={5} />
+              <Configure hitsPerPage={18} />
               <Hits hitComponent={Hit} />
 
               <div className="pagination">
