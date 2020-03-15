@@ -83,14 +83,31 @@ class App extends Component {
       <div className="emblem-image-container">
         <img
           className="emblem-image"
-          src={hit.imageUrl.replace(
-            /g\/\d*px/g,
-            `g/${
-              window.innerWidth < window.innerHeight
-                ? window.innerWidth
-                : window.innerHeight
-            }px`
-          )}
+          src={hit.imageUrl}
+          data-zoom-src={
+            navigator.userAgent.indexOf('Safari') > -1 &&
+            navigator.userAgent.search(/Chrom(e|ium)/gm) === -1
+              ? `https://www.mediawiki.org/w/index.php?title=Special:Redirect/file/${hit.imageUrl
+                  .split('/')
+                  .pop()
+                  .replace('80px-', '')}&width=${
+                  window.innerWidth < window.innerHeight
+                    ? window.innerWidth
+                    : window.innerHeight
+                }&height=${
+                  window.innerWidth < window.innerHeight
+                    ? window.innerWidth
+                    : window.innerHeight
+                }`
+              : hit.imageUrl.replace(
+                  /g\/\d*px/g,
+                  `g/${
+                    window.innerWidth < window.innerHeight
+                      ? window.innerWidth
+                      : window.innerHeight
+                  }px`
+                )
+          }
           alt={`Armoiries ${hit.name}`}
           ref={this.attachZoom}
         />
