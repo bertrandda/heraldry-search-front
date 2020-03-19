@@ -1,0 +1,41 @@
+.emblem-container {
+  display: flex;
+}
+
+.emblem-image-container {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.emblem-image {
+  position: absolute;
+  max-width: calc(100% - 30px);
+  max-height: calc(100% - 30px);
+}
+
+.emblem-info-container {
+  flex: 2;
+  height: 7em;
+}
+
+.emblem-title {
+  flex: 0 0 100%;
+  font-size: 0.9rem;
+}
+
+.emblem-description {
+  max-height: 5em;
+  overflow: hidden;
+  margin: 0px;
+  font-size: 0.9rem;
+  text-align: justify;
+  line-height: 18px;
+}
+
+.emblem-description-more {
+  margin: 0;
+  text-align: center;
+}
