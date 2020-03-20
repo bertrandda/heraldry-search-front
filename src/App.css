@@ -87,49 +87,6 @@
   box-shadow: none;
 }
 
-.emblem-container {
-  display: flex;
-}
-
-.emblem-image-container {
-  flex: 1;
-  position: relative;
-  text-align: center;
-}
-
-.emblem-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: calc(100% - 30px);
-  max-height: calc(100% - 30px);
-}
-
-.emblem-info-container {
-  flex: 2;
-  height: 7em;
-}
-
-.emblem-title {
-  flex: 0 0 100%;
-  font-size: 0.9rem;
-}
-
-.emblem-description {
-  max-height: 5em;
-  overflow: hidden;
-  margin: 0px;
-  font-size: 0.9rem;
-  text-align: justify;
-  line-height: 18px;
-}
-
-.emblem-description-more {
-  margin: 0;
-  text-align: center;
-}
-
 .pagination {
   margin: 2rem auto;
   text-align: center;
