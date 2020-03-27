@@ -8,6 +8,8 @@ import {
   Pagination,
   PoweredBy,
 } from 'react-instantsearch-dom';
+import { ModalContextProvider } from './contexts/ModalContext';
+import EmblemModal from './components/EmblemModal';
 import EmblemItem from './components/EmblemItem';
 import './App.css';
 
@@ -57,17 +59,20 @@ class App extends Component {
         <PoweredBy />
       </header>
 
-      <div className="container">
-        <div className="search-panel">
-          <div className="search-panel__results">
-            <Configure hitsPerPage={18} />
-            <Hits hitComponent={EmblemItem} />
-            <div className="pagination">
-              <Pagination />
+      <ModalContextProvider>
+        <div className="container">
+          <div className="search-panel">
+            <div className="search-panel__results">
+              <Configure hitsPerPage={18} />
+              <Hits hitComponent={EmblemItem} />
+              <div className="pagination">
+                <Pagination />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        <EmblemModal />
+      </ModalContextProvider>
     </InstantSearch>
   );
 }

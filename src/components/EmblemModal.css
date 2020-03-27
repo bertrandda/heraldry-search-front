@@ -1,0 +1,65 @@
+.emblem-modal {
+  position: fixed;
+  inset: 0px;
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+.emblem-modal-window {
+  position: absolute;
+  inset: 10px;
+  background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+  overflow: auto;
+  border-radius: 4px;
+  outline: currentcolor none medium;
+  padding: 10px;
+}
+
+.close-modal {
+  position: absolute;
+  right: 10px;
+}
+
+.close-modal:hover {
+  cursor: pointer;
+}
+
+.emblem-title-modal {
+  text-align: center;
+}
+
+.emblem-image-modal {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 100%;
+  max-width: 18rem;
+}
+
+.link-wikipedia-modal {
+  text-align: center;
+  margin: 10px;
+}
+
+.link-wikipedia-modal a {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+.link-wikipedia-icon {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.floatleft, .floatright {
+  text-align: center;
+}
+
+@media only screen and (min-width: 31rem) {
+  .emblem-modal-window {
+    width: 28rem;
+    inset: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

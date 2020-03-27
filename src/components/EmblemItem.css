@@ -19,6 +19,32 @@
 .emblem-info-container {
   flex: 2;
   height: 7em;
+  position: relative;
+  overflow: hidden;
+}
+
+.emblem-info-container:hover {
+  cursor: pointer;
+}
+
+.emblem-info-container::after {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  content: '';
+  background: linear-gradient(rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 90%);
+  pointer-events: none;
+}
+
+.emblem-info-container:hover::after {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  content: '';
+  background: rgba(255, 255, 255, 0);
+  pointer-events: none;
 }
 
 .emblem-title {

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import mediumZoom from 'medium-zoom';
+import { ModalContext } from '../contexts/ModalContext';
 import './EmblemItem.css';
 
 const EmblemItem = ({ hit }) => {
+  const { showModal } = useContext(ModalContext);
   const zoom = mediumZoom();
 
-  const attachZoom = image => {
+  const attachZoom = (image) => {
     zoom.attach(image);
   };
 
@@ -50,10 +52,14 @@ const EmblemItem = ({ hit }) => {
           ref={attachZoom}
         />
       </div>
-      <span className="emblem-info-container">
+      <span
+        className="emblem-info-container"
+        onClick={() => {
+          showModal(hit);
+        }}
+      >
         <h1 className="emblem-title">{hit.name}</h1>
         <p className="emblem-description">{hit.descriptionText}</p>
-        <p className="emblem-description-more">...</p>
       </span>
     </article>
   );
