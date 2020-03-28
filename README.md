@@ -12,6 +12,8 @@ _This project was generated with [create-instantsearch-app](https://github.com/a
 - 🔍 Simple and powerful search by [Algolia](https://algolia.com)
 
 ## Get started
+Create `.env` file from `.env.sample` and complete it with the Algolia app settings in your [console](https://www.algolia.com/users/sign_inhttps://www.algolia.com/users/sign_in).
+
 To run this project locally, install the dependencies and run the local server:
 
 ```sh
