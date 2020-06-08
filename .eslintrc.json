@@ -1,0 +1,8 @@
+{
+  "extends": "algolia/react",
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  }
+}
