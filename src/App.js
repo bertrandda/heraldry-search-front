@@ -3,14 +3,13 @@ import algoliasearch from 'algoliasearch/lite';
 import {
   InstantSearch,
   Configure,
-  Hits,
   SearchBox,
   Pagination,
   PoweredBy,
 } from 'react-instantsearch-dom';
 import { ModalContextProvider } from './contexts/ModalContext';
 import EmblemModal from './components/EmblemModal';
-import EmblemItem from './components/EmblemItem';
+import CustomHit from './components/CustomHits';
 import './App.css';
 
 const searchClient = algoliasearch(
@@ -64,7 +63,7 @@ class App extends Component {
           <div className="search-panel">
             <div className="search-panel__results">
               <Configure hitsPerPage={18} />
-              <Hits hitComponent={EmblemItem} />
+              <CustomHit />
               <div className="pagination">
                 <Pagination />
               </div>

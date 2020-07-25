@@ -1,15 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
-import mediumZoom from 'medium-zoom';
 import { ModalContext } from '../contexts/ModalContext';
 import './EmblemItem.css';
 
-const EmblemItem = ({ hit }) => {
+const EmblemItem = ({ hit, zoom }) => {
   const { showModal } = useContext(ModalContext);
-  const zoom = mediumZoom();
+  const zoomRef = useRef(zoom);
 
   const attachZoom = (image) => {
-    zoom.attach(image);
+    zoomRef.current.attach(image);
   };
 
   zoom.on('opened', () => {
@@ -67,10 +66,12 @@ const EmblemItem = ({ hit }) => {
 
 EmblemItem.propTypes = {
   hit: PropTypes.object,
+  zoom: PropTypes.object,
 };
 
 EmblemItem.defaultProps = {
   hit: {},
+  zoom: {},
 };
 
 export default EmblemItem;
