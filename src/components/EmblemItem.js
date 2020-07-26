@@ -11,12 +11,6 @@ const EmblemItem = ({ hit, zoom }) => {
     zoomRef.current.attach(image);
   };
 
-  zoom.on('opened', () => {
-    document.getElementsByClassName(
-      'medium-zoom-image--opened'
-    )[0].style.visibility = 'hidden';
-  });
-
   return (
     <article className="emblem-container">
       <div className="emblem-image-container">
