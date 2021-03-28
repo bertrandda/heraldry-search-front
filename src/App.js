@@ -33,8 +33,8 @@ if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
   };
 }
 
-class App extends Component {
-  render = () => (
+const App = () => {
+  return (
     <InstantSearch
       searchClient={searchClient}
       indexName={process.env.REACT_APP_ALGOLIA_INDEX}

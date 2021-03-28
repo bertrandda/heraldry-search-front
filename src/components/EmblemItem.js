@@ -47,6 +47,8 @@ const EmblemItem = ({ hit, zoom }) => {
       </div>
       <span
         className="emblem-info-container"
+        role="button"
+        tabIndex={0}
         onClick={() => {
           showModal(hit);
         }}
