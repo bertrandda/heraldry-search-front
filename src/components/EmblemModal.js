@@ -42,17 +42,16 @@ const EmblemModal = () => {
         }
         alt={`Armoiries ${modalInfo.name}`}
       />
-      <div className="link-wikipedia-modal">
-        <a href="https://fr.wikipedia.org/wiki/Portail:H%C3%A9raldique">
-          Wikipédia
+      {modalInfo.sourceUrl && <div className="link-wikipedia-modal">
+        <a href={modalInfo.sourceUrl} target="_blank" rel="noopener noreferrer">
+          Source
           <Icon
             className="link-wikipedia-icon"
             path={mdiLinkVariant}
             size={0.5}
           />
-          :
         </a>
-      </div>
+      </div>}
       <div
         dangerouslySetInnerHTML={{
           __html:
