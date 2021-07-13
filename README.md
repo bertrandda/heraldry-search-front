@@ -14,6 +14,14 @@ _This project was generated with [create-instantsearch-app](https://github.com/a
 ## Get started
 Create `.env` file from `.env.sample` and complete it with the Algolia app settings in your [console](https://www.algolia.com/users/sign_inhttps://www.algolia.com/users/sign_in).
 
+```sh
+REACT_APP_SEARCH_SERVICE=     # Search service `algolia` OR `custom`
+REACT_APP_ALGOLIA_APP_ID=     # Aloglia app ID
+REACT_APP_ALGOLIA_API_KEY=    # Algolia API Key
+REACT_APP_ALGOLIA_INDEX=      # Algolia index name
+REACT_APP_CUSTOM_SEARCH_URL=  # if `custom` search service, heraldry-crawler server url
+```
+
 To run this project locally, install the dependencies and run the local server:
 
 ```sh
