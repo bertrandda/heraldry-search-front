@@ -12,13 +12,29 @@ import EmblemModal from './components/EmblemModal';
 import CustomHit from './components/CustomHits';
 import './App.css';
 
-const searchClient = algoliasearch(
-  process.env.REACT_APP_ALGOLIA_APP_ID,
-  process.env.REACT_APP_ALGOLIA_API_KEY
-);
+let searchClient;
 
-class App extends Component {
-  render = () => (
+if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
+  searchClient = algoliasearch(
+    process.env.REACT_APP_ALGOLIA_APP_ID,
+    process.env.REACT_APP_ALGOLIA_API_KEY
+  );
+} else if (process.env.REACT_APP_SEARCH_SERVICE === 'custom') {
+  searchClient = {
+    search: (requests) => {
+      return fetch(`${process.env.REACT_APP_CUSTOM_SEARCH_URL}/search`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ requests }),
+      }).then((res) => res.json());
+    },
+  };
+}
+
+const App = () => {
+  return (
     <InstantSearch
       searchClient={searchClient}
       indexName={process.env.REACT_APP_ALGOLIA_INDEX}
@@ -55,7 +71,7 @@ class App extends Component {
             </svg>
           }
         />
-        <PoweredBy />
+        {process.env.REACT_APP_SEARCH_SERVICE === 'algolia' && <PoweredBy />}
       </header>
 
       <ModalContextProvider>

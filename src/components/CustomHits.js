@@ -21,8 +21,8 @@ const Hits = ({ hits }) => {
   return (
     <div className="ais-Hits">
       <div className="ais-Hits-list">
-        {hits.map((hit, i) => (
-          <div key={`${i}-${hit.name}-item`} className="ais-Hits-item">
+        {hits.map((hit) => (
+          <div key={`${hit.objectID || hit.emblemId}-${hit.name}-item`} className="ais-Hits-item">
             <EmblemItem hit={hit} zoom={zoomRef.current} />
           </div>
         ))}

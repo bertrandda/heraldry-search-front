@@ -7,7 +7,7 @@ export const ModalContext = createContext({
   hideModal: () => {},
 });
 
-export function ModalContextProvider({ children }) {
+export const ModalContextProvider = ({ children }) => {
   const [modalInfo, setModalInfo] = useState({});
 
   const showModal = (emblemInfo) => {
