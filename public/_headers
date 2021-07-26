@@ -1,0 +1,15 @@
+/*
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'self';
+/static/*.css
+  Cache-Control: public
+  Cache-Control: max-age=604800
+/static/*.js
+  Cache-Control: public
+  Cache-Control: max-age=604800
+/static/*.jpg
+  Cache-Control: public
+  Cache-Control: max-age=604800
+/*.png
+  Cache-Control: public
+  Cache-Control: max-age=604800

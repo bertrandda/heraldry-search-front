@@ -47,6 +47,7 @@ const App = () => {
         <SearchBox
           className="searchbox"
           translations={{
+            'aria-label': 'Recherche',
             placeholder: 'Parti, de gueules, famille...',
           }}
           submit={
