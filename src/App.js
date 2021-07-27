@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import {
   InstantSearch,
@@ -34,6 +34,10 @@ if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
 }
 
 const App = () => {
+  useEffect(() => {
+    document.getElementsByClassName('ais-SearchBox-input')[0].setAttribute('aria-label', 'Recherche')
+  }, [])
+
   return (
     <InstantSearch
       searchClient={searchClient}
@@ -47,7 +51,6 @@ const App = () => {
         <SearchBox
           className="searchbox"
           translations={{
-            'aria-label': 'Recherche',
             placeholder: 'Parti, de gueules, famille...',
           }}
           submit={
