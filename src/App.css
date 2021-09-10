@@ -7,6 +7,15 @@
   padding: 0.5rem 1rem;
   background: linear-gradient(rgba(114, 91, 83, 0.4), rgba(50, 25, 17, 0.6)),
     url(./assets/cover.jpg);
+  background: linear-gradient(rgba(114, 91, 83, 0.4), rgba(50, 25, 17, 0.6)),
+    -webkit-image-set(
+      url(./assets/cover.webp) 1x);
+  background: linear-gradient(rgba(114, 91, 83, 0.4), rgba(50, 25, 17, 0.6)),
+    image-set(
+      url(./assets/cover.avif) type("image/avif"),
+      url(./assets/cover.webp) type("image/webp"),
+      url(./assets/cover.jpg) type("image/jpeg")
+    );
   background-size: cover;
   color: #fff;
   margin-bottom: 1rem;
