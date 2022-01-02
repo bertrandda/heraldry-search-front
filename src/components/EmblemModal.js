@@ -42,15 +42,13 @@ const EmblemModal = () => {
         }
         alt={`Armoiries ${modalInfo.name}`}
       />
-      {modalInfo.sourceUrl && <div className="link-wikipedia-modal">
-        <a href={modalInfo.sourceUrl} target="_blank" rel="noopener noreferrer">
-          Source
-          <Icon
-            className="link-wikipedia-icon"
-            path={mdiLinkVariant}
-            size={0.5}
-          />
-        </a>
+      {modalInfo.credits && <div className="credit-wikipedia-modal">
+        Crédits : <span className="credit-value-wikipedia-modal"
+          dangerouslySetInnerHTML={{
+            __html:
+              modalInfo.credits.replaceAll('<a ', '<a target="_blank" ')
+          }}
+        />
       </div>}
       <div
         dangerouslySetInnerHTML={{
@@ -62,6 +60,16 @@ const EmblemModal = () => {
             ),
         }}
       />
+      {modalInfo.sourceUrl && <div className="link-wikipedia-modal">
+        <a href={modalInfo.sourceUrl} target="_blank" rel="noopener noreferrer">
+          Source
+          <Icon
+            className="link-wikipedia-icon"
+            path={mdiLinkVariant}
+            size={0.5}
+          />
+        </a>
+      </div>}
     </ReactModal>
   );
 };

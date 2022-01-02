@@ -45,6 +45,13 @@
   max-width: 18rem;
 }
 
+.credit-wikipedia-modal {
+  text-align: center;
+  font-weight: lighter;
+  font-size: 0.8em;
+  margin: 5px;
+}
+
 .link-wikipedia-modal {
   text-align: center;
   margin: 10px;
