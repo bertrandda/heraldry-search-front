@@ -1,7 +1,8 @@
-import React, { useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import mediumZoom from 'medium-zoom';
+import PropTypes from 'prop-types';
+import React, { useRef, useEffect } from 'react';
 import { connectHits } from 'react-instantsearch-dom';
+
 import EmblemItem from './EmblemItem';
 
 const zoom = mediumZoom();
@@ -22,7 +23,10 @@ const Hits = ({ hits }) => {
     <div className="ais-Hits">
       <div className="ais-Hits-list">
         {hits.map((hit) => (
-          <div key={`${hit.objectID || hit.emblemId}-${hit.name}-item`} className="ais-Hits-item">
+          <div
+            key={`${hit.objectID || hit.emblemId}-${hit.name}-item`}
+            className="ais-Hits-item"
+          >
             <EmblemItem hit={hit} zoom={zoomRef.current} />
           </div>
         ))}

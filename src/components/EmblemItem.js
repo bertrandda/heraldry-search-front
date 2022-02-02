@@ -1,5 +1,6 @@
-import React, { useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
+import React, { useContext, useRef } from 'react';
+
 import { ModalContext } from '../contexts/ModalContext';
 import { generateUrl } from '../helpers/image';
 import './EmblemItem.css';
