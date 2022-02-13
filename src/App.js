@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import algoliasearch from 'algoliasearch/lite';
+import React, { useEffect } from 'react';
 import {
   InstantSearch,
   Configure,
@@ -7,9 +7,10 @@ import {
   Pagination,
   PoweredBy,
 } from 'react-instantsearch-dom';
-import { ModalContextProvider } from './contexts/ModalContext';
-import EmblemModal from './components/EmblemModal';
+
 import CustomHit from './components/CustomHits';
+import EmblemModal from './components/EmblemModal';
+import { ModalContextProvider } from './contexts/ModalContext';
 import './App.css';
 
 let searchClient;
@@ -21,22 +22,23 @@ if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
   );
 } else if (process.env.REACT_APP_SEARCH_SERVICE === 'custom') {
   searchClient = {
-    search: (requests) => {
-      return fetch(`${process.env.REACT_APP_CUSTOM_SEARCH_URL}/search`, {
+    search: (requests) =>
+      fetch(`${process.env.REACT_APP_CUSTOM_SEARCH_URL}/search`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ requests }),
-      }).then((res) => res.json());
-    },
+      }).then((res) => res.json()),
   };
 }
 
 const App = () => {
   useEffect(() => {
-    document.getElementsByClassName('ais-SearchBox-input')[0].setAttribute('aria-label', 'Recherche')
-  }, [])
+    document
+      .getElementsByClassName('ais-SearchBox-input')[0]
+      .setAttribute('aria-label', 'Recherche');
+  }, []);
 
   return (
     <InstantSearch
@@ -94,6 +96,6 @@ const App = () => {
       </ModalContextProvider>
     </InstantSearch>
   );
-}
+};
 
 export default App;

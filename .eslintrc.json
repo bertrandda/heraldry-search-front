@@ -1,19 +1,32 @@
 {
-  "extends": "algolia/react",
-  "settings": {
-    "react": {
-      "version": "latest"
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "algolia",
+        "algolia/react"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "requireConfigFile": false
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ]
     }
-  },
-  "rules": {
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
-    ]
-  }
 }
