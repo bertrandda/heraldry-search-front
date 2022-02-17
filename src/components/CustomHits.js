@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import { connectHits } from 'react-instantsearch-dom';
 
 import EmblemItem from './EmblemItem';
+import './CustomHits.css';
 
 const zoom = mediumZoom();
 
@@ -13,16 +14,37 @@ const Hits = ({ hits }) => {
 
   useEffect(() => {
     if (
-      // Hack to avoid blurry image on zoom macOS Safari & iOS/ipadOS browsers
+      // Hacky way to avoid blurry image on zoom Safari & iOS/ipadOS browsers
       navigator.userAgent.indexOf('AppleWebKit') > -1 &&
       navigator.userAgent.search(/Chrom(e|ium)/gm) === -1
     ) {
       zoomRef.current.on('opened', () => {
+        let customTransition = false;
         const zoomedElem = document.getElementsByClassName(
           'medium-zoom-image--opened'
         )[1];
-        zoomedElem.style.visibility = 'hidden';
-        zoomedElem.style.position = 'fixed';
+        zoomedElem.classList.add(
+          'safari-zoom-image-invisible',
+          'safari-zoom-image-opening'
+        );
+
+        const transitionendCb = () => {
+          if (customTransition) {
+            zoomedElem.classList.add('safari-zoom-image-visible');
+            zoomedElem.classList.remove('safari-zoom-image-invisible');
+            document
+              .getElementsByClassName('medium-zoom-image--opened')[0]
+              .classList.add('safari-zoom-image-invisible');
+            zoomedElem.removeEventListener('transitionend', transitionendCb);
+
+            return;
+          }
+
+          customTransition = true;
+        };
+
+        zoomedElem.addEventListener('transitionend', transitionendCb);
+
         if (window.innerWidth < window.innerHeight) {
           zoomedElem.style.width = '100%';
           zoomedElem.style.removeProperty('height');
@@ -30,30 +52,19 @@ const Hits = ({ hits }) => {
           zoomedElem.style.height = '100%';
           zoomedElem.style.removeProperty('width');
         }
-        zoomedElem.style['max-width'] = '100%';
-        zoomedElem.style['max-height'] = '100%';
-        zoomedElem.style.top = '50%';
-        zoomedElem.style.left = '50%';
-        zoomedElem.style.transform = 'translate(-50%, -50%)';
-        zoomedElem.style.transform = zoomedElem.style.transform.replace(
-          /scale\(\d\.\d+\)/,
-          ''
-        );
-        setTimeout(() => {
-          zoomedElem.style.visibility = 'visible';
-          document.getElementsByClassName(
-            'medium-zoom-image--opened'
-          )[0].style.visibility = 'hidden';
-        }, 300);
       });
 
       zoomRef.current.on('close', () => {
-        document.getElementsByClassName(
+        const zoomableElem = document.getElementsByClassName(
           'medium-zoom-image--opened'
-        )[0].style.visibility = 'visible';
-        document.getElementsByClassName(
+        )[0];
+        zoomableElem.classList.add('safari-zoom-image-visible');
+        zoomableElem.classList.remove('safari-zoom-image-invisible');
+        const zoomedElem = document.getElementsByClassName(
           'medium-zoom-image--opened'
-        )[1].style.visibility = 'hidden';
+        )[1];
+        zoomedElem.classList.add('safari-zoom-image-invisible');
+        zoomedElem.classList.remove('safari-zoom-image-visible');
       });
     }
   }, []);
