@@ -20,22 +20,17 @@ const Hits = ({ hits }) => {
     ) {
       zoomRef.current.on('opened', () => {
         let customTransition = false;
-        const zoomedElem = document.getElementsByClassName(
+        const zoomImages = document.getElementsByClassName(
           'medium-zoom-image--opened'
-        )[1];
-        zoomedElem.classList.add(
-          'safari-zoom-image-invisible',
-          'safari-zoom-image-opening'
         );
+        zoomImages[1].style.visibility = 'hidden';
+        zoomImages[1].classList.add('safari-zoom-image-opening');
 
         const transitionendCb = () => {
           if (customTransition) {
-            zoomedElem.classList.add('safari-zoom-image-visible');
-            zoomedElem.classList.remove('safari-zoom-image-invisible');
-            document
-              .getElementsByClassName('medium-zoom-image--opened')[0]
-              .classList.add('safari-zoom-image-invisible');
-            zoomedElem.removeEventListener('transitionend', transitionendCb);
+            zoomImages[1].style.visibility = 'visible';
+            zoomImages[0].style.visibility = 'hidden';
+            zoomImages[1].removeEventListener('transitionend', transitionendCb);
 
             return;
           }
@@ -43,28 +38,23 @@ const Hits = ({ hits }) => {
           customTransition = true;
         };
 
-        zoomedElem.addEventListener('transitionend', transitionendCb);
+        zoomImages[1].addEventListener('transitionend', transitionendCb);
 
         if (window.innerWidth < window.innerHeight) {
-          zoomedElem.style.width = '100%';
-          zoomedElem.style.removeProperty('height');
+          zoomImages[1].style.width = '100%';
+          zoomImages[1].style.removeProperty('height');
         } else {
-          zoomedElem.style.height = '100%';
-          zoomedElem.style.removeProperty('width');
+          zoomImages[1].style.height = '100%';
+          zoomImages[1].style.removeProperty('width');
         }
       });
 
       zoomRef.current.on('close', () => {
-        const zoomableElem = document.getElementsByClassName(
+        const zoomImages = document.getElementsByClassName(
           'medium-zoom-image--opened'
-        )[0];
-        zoomableElem.classList.add('safari-zoom-image-visible');
-        zoomableElem.classList.remove('safari-zoom-image-invisible');
-        const zoomedElem = document.getElementsByClassName(
-          'medium-zoom-image--opened'
-        )[1];
-        zoomedElem.classList.add('safari-zoom-image-invisible');
-        zoomedElem.classList.remove('safari-zoom-image-visible');
+        );
+        zoomImages[0].style.visibility = 'visible';
+        zoomImages[1].style.visibility = 'hidden';
       });
     }
   }, []);
