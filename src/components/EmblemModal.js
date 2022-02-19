@@ -5,6 +5,7 @@ import React, { useContext } from 'react';
 import ReactModal from 'react-modal';
 
 import { ModalContext } from '../contexts/ModalContext';
+import { generateUrl } from '../helpers/image';
 import './EmblemModal.css';
 
 ReactModal.setAppElement('#root');
@@ -32,13 +33,15 @@ const EmblemModal = () => {
         className="emblem-image-modal"
         src={
           modalInfo.imageUrl &&
-          modalInfo.imageUrl.replace(
-            /g\/\d*px/g,
-            `g/${
-              window.innerWidth < window.innerHeight
-                ? window.innerWidth
-                : window.innerHeight
-            }px`
+          generateUrl(
+            modalInfo.imageUrl.replace(
+              /g\/\d*px/g,
+              `g/${
+                window.innerWidth < window.innerHeight
+                  ? window.innerWidth
+                  : window.innerHeight
+              }px`
+            )
           )
         }
         alt={`Armoiries ${modalInfo.name}`}

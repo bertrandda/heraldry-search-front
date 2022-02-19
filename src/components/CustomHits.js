@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import { connectHits } from 'react-instantsearch-dom';
 
 import EmblemItem from './EmblemItem';
+import './CustomHits.css';
 
 const zoom = mediumZoom();
 
@@ -12,11 +13,50 @@ const Hits = ({ hits }) => {
   zoomRef.current.detach();
 
   useEffect(() => {
-    zoomRef.current.on('opened', () => {
-      document.getElementsByClassName(
-        'medium-zoom-image--opened'
-      )[0].style.visibility = 'hidden';
-    });
+    if (
+      // Hacky way to avoid blurry image on zoom Safari & iOS/ipadOS browsers
+      navigator.userAgent.indexOf('AppleWebKit') > -1 &&
+      navigator.userAgent.search(/Chrom(e|ium)/gm) === -1
+    ) {
+      zoomRef.current.on('opened', () => {
+        let customTransition = false;
+        const zoomImages = document.getElementsByClassName(
+          'medium-zoom-image--opened'
+        );
+        zoomImages[1].style.visibility = 'hidden';
+        zoomImages[1].classList.add('safari-zoom-image-opening');
+
+        const transitionendCb = () => {
+          if (customTransition) {
+            zoomImages[1].style.visibility = 'visible';
+            zoomImages[0].style.visibility = 'hidden';
+            zoomImages[1].removeEventListener('transitionend', transitionendCb);
+
+            return;
+          }
+
+          customTransition = true;
+        };
+
+        zoomImages[1].addEventListener('transitionend', transitionendCb);
+
+        if (window.innerWidth < window.innerHeight) {
+          zoomImages[1].style.width = '100%';
+          zoomImages[1].style.removeProperty('height');
+        } else {
+          zoomImages[1].style.height = '100%';
+          zoomImages[1].style.removeProperty('width');
+        }
+      });
+
+      zoomRef.current.on('close', () => {
+        const zoomImages = document.getElementsByClassName(
+          'medium-zoom-image--opened'
+        );
+        zoomImages[0].style.visibility = 'visible';
+        zoomImages[1].style.visibility = 'hidden';
+      });
+    }
   }, []);
 
   return (
