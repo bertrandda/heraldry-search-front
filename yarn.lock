@@ -1231,6 +1231,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource/hind/-/hind-4.5.2.tgz#15160ff666ab27a52338be7f7addc6d12e59dfde"
   integrity sha512-AHXNRp50S5zd3OUcNVMtj9IXX6Ck/CsMQluFu9emQhYXY/I0iv9xVFxInYRXaWsFXgAGGiPtdyBGAiG850fIIQ==
 
+"@fontsource/open-sans@^4.5.5":
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/open-sans/-/open-sans-4.5.5.tgz#f42ede921cc807cf7b96896691348d75dafbf70c"
+  integrity sha512-h1oUPSQpoMnDrnzIZTVS9PPBFhWXS87v6/cd9FY2Xc+GKbOVcjPZxcvUDU1TnCie2QSoYY9aifERRV/d8JHtWQ==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.3"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.3.tgz#f2564c744b387775b436418491f15fce6601f63e"
