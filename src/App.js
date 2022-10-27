@@ -11,6 +11,8 @@ import {
 import CustomHit from './components/CustomHits';
 import EmblemModal from './components/EmblemModal';
 import { ModalContextProvider } from './contexts/ModalContext';
+
+import '@fontsource/hind';
 import './App.css';
 
 let searchClient;
