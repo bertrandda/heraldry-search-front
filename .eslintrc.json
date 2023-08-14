@@ -15,9 +15,6 @@
         "sourceType": "module",
         "requireConfigFile": false
     },
-    "plugins": [
-        "react"
-    ],
     "rules": {
       "react/jsx-filename-extension": [
         1,

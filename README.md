@@ -1,7 +1,7 @@
 # heraldry-search-front
 Front French armorial, linked with [heraldry-crawler](https://github.com/bertrandda/heraldry-crawler) project.
 
-_This project was generated with [create-instantsearch-app](https://github.com/algolia/create-instantsearch-app) by [Algolia](https://algolia.com)._
+_This project was originally generated with [create-instantsearch-app](https://github.com/algolia/create-instantsearch-app) by [Algolia](https://algolia.com)._
 
 ## Features
 - 📖 Data from Wikipedia armorials [heraldry-crawler](https://github.com/bertrandda/heraldry-crawler)
