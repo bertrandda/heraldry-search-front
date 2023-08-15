@@ -97,8 +97,20 @@
 }
 
 .pagination {
-  margin: 2rem auto;
+  margin: 1.3rem auto;
   text-align: center;
+}
+
+.link-github {
+  text-align: center;
+}
+
+.link-github-icon {
+  color: rgb(156, 156, 156);
+}
+
+.link-github-icon:hover {
+  color: black;
 }
 
 @media screen and (min-width: 680px) {

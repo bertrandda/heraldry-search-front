@@ -1,3 +1,5 @@
+import { mdiGithub } from '@mdi/js';
+import Icon from '@mdi/react';
 import algoliasearch from 'algoliasearch/lite';
 import React, { useEffect } from 'react';
 import {
@@ -92,6 +94,15 @@ const App = () => {
                 <Pagination />
               </div>
             </div>
+          </div>
+          <div className="link-github">
+            <a
+              href="https://github.com/bertrandda/heraldry-search-front"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon className="link-github-icon" path={mdiGithub} size={0.8} />
+            </a>
           </div>
         </div>
         <EmblemModal />
