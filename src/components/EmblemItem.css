@@ -21,6 +21,8 @@
   height: 7em;
   position: relative;
   overflow: hidden;
+  color: #3a4570;
+  text-decoration: none;
 }
 
 .emblem-info-container:hover {

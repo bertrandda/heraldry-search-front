@@ -1,40 +1,42 @@
 import { mdiClose, mdiLinkVariant } from '@mdi/js';
 import Icon from '@mdi/react';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactModal from 'react-modal';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { ModalContext } from '../contexts/ModalContext';
 import { generateUrl } from '../helpers/image';
 import './EmblemModal.css';
 
 ReactModal.setAppElement('#root');
 
 const EmblemModal = () => {
-  const { modalInfo, hideModal } = useContext(ModalContext);
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const closeModal = () => navigate('/');
 
   return (
     <ReactModal
       className="emblem-modal-window"
       overlayClassName="emblem-modal"
-      isOpen={Object.keys(modalInfo).length !== 0}
+      isOpen={true}
       contentLabel="emblem-modal"
-      onRequestClose={hideModal}
+      onRequestClose={closeModal}
     >
       <Icon
         className="close-modal"
         path={mdiClose}
         size={1}
         color="rgb(58, 69, 112)"
-        onClick={hideModal}
+        onClick={closeModal}
       />
-      <h2 className="emblem-title-modal">{modalInfo.name}</h2>
+      <h2 className="emblem-title-modal">{state.emblem.name}</h2>
       <img
         className="emblem-image-modal"
         src={
-          modalInfo.imageUrl &&
+          state.emblem.imageUrl &&
           generateUrl(
-            modalInfo.imageUrl.replace(
+            state.emblem.imageUrl.replace(
               /g\/\d*px/g,
               `g/${
                 window.innerWidth < window.innerHeight
@@ -44,15 +46,15 @@ const EmblemModal = () => {
             )
           )
         }
-        alt={`Armoiries ${modalInfo.name}`}
+        alt={`Armoiries ${state.emblem.name}`}
       />
-      {modalInfo.credits && (
+      {state.emblem.credits && (
         <div className="credit-wikipedia-modal">
           Crédits :{' '}
           <span
             className="credit-value-wikipedia-modal"
             dangerouslySetInnerHTML={{
-              __html: modalInfo.credits.replaceAll(
+              __html: state.emblem.credits.replaceAll(
                 '<a ',
                 '<a target="_blank" '
               ),
@@ -63,17 +65,17 @@ const EmblemModal = () => {
       <div
         dangerouslySetInnerHTML={{
           __html:
-            modalInfo.description &&
-            modalInfo.description.replace(
+            state.emblem.description &&
+            state.emblem.description.replace(
               /href="\//gim,
               'target="_blank" rel="noopener noreferrer" href="https://fr.wikipedia.org/'
             ),
         }}
       />
-      {modalInfo.sourceUrl && (
+      {state.emblem.sourceUrl && (
         <div className="link-wikipedia-modal">
           <a
-            href={modalInfo.sourceUrl}
+            href={state.emblem.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
           >

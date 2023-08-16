@@ -9,10 +9,9 @@ import {
   Pagination,
   PoweredBy,
 } from 'react-instantsearch-dom';
+import { Outlet } from 'react-router-dom';
 
 import CustomHit from './components/CustomHits';
-import EmblemModal from './components/EmblemModal';
-import { ModalContextProvider } from './contexts/ModalContext';
 
 import '@fontsource/hind';
 import './App.css';
@@ -84,29 +83,27 @@ const App = () => {
         {process.env.REACT_APP_SEARCH_SERVICE === 'algolia' && <PoweredBy />}
       </header>
 
-      <ModalContextProvider>
-        <div className="container">
-          <div className="search-panel">
-            <div className="search-panel__results">
-              <Configure hitsPerPage={18} />
-              <CustomHit />
-              <div className="pagination">
-                <Pagination />
-              </div>
+      <div className="container">
+        <div className="search-panel">
+          <div className="search-panel__results">
+            <Configure hitsPerPage={18} />
+            <CustomHit />
+            <div className="pagination">
+              <Pagination />
             </div>
           </div>
-          <div className="link-github">
-            <a
-              href="https://github.com/bertrandda/heraldry-search-front"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon className="link-github-icon" path={mdiGithub} size={0.8} />
-            </a>
-          </div>
         </div>
-        <EmblemModal />
-      </ModalContextProvider>
+        <div className="link-github">
+          <a
+            href="https://github.com/bertrandda/heraldry-search-front"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon className="link-github-icon" path={mdiGithub} size={0.8} />
+          </a>
+        </div>
+      </div>
+      <Outlet />
     </InstantSearch>
   );
 };
