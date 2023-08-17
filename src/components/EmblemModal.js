@@ -1,7 +1,7 @@
-import { mdiClose, mdiLinkVariant } from '@mdi/js';
+import { mdiCheckAll, mdiClose, mdiOpenInNew, mdiShareVariant } from '@mdi/js';
 import Icon from '@mdi/react';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -11,9 +11,18 @@ import './EmblemModal.css';
 ReactModal.setAppElement('#root');
 
 const EmblemModal = () => {
-  const { state } = useLocation();
+  const { state, pathname } = useLocation();
   const navigate = useNavigate();
   const closeModal = () => navigate('/');
+
+  const [shareIcon, setShareIcon] = useState(mdiShareVariant);
+
+  const copyShareLink = () => {
+    navigator.clipboard.writeText(`${process.env.REACT_APP_HOST}${pathname}`);
+    setShareIcon(mdiCheckAll);
+
+    setTimeout(() => setShareIcon(mdiShareVariant), 1000);
+  };
 
   return (
     <ReactModal
@@ -82,11 +91,21 @@ const EmblemModal = () => {
             Source
             <Icon
               className="link-wikipedia-icon"
-              path={mdiLinkVariant}
+              path={mdiOpenInNew}
               size={0.5}
+              title="Ouvrir dans un nouvel onglet"
             />
           </a>
         </div>
+      )}
+      {process.env.REACT_APP_HOST && (
+        <Icon
+          className="share-link-icon"
+          path={shareIcon}
+          size={0.9}
+          title="Copier le lien de partage"
+          onClick={copyShareLink}
+        />
       )}
     </ReactModal>
   );
