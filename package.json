@@ -9,11 +9,14 @@
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.405.0",
     "@fontsource/hind": "^5.0.8",
     "@fontsource/open-sans": "^5.0.8",
     "@mdi/js": "^7.2.96",
     "@mdi/react": "^1.6.1",
     "algoliasearch": "4.19.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
     "instantsearch.css": "8.0.0",
     "medium-zoom": "^1.0.8",
     "react": "18.2.0",

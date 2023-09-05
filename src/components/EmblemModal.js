@@ -3,7 +3,7 @@ import Icon from '@mdi/react';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 
 import { generateUrl } from '../helpers/image';
 import './EmblemModal.css';
@@ -16,6 +16,7 @@ const EmblemModal = () => {
   const closeModal = () => navigate('/');
 
   const [shareIcon, setShareIcon] = useState(mdiShareVariant);
+  const [emblemData] = useState(state?.emblem || window?.__EMBLEM_DATA__);
 
   const copyShareLink = () => {
     navigator.clipboard.writeText(`${process.env.REACT_APP_HOST}${pathname}`);
@@ -23,6 +24,10 @@ const EmblemModal = () => {
 
     setTimeout(() => setShareIcon(mdiShareVariant), 1000);
   };
+
+  if (!emblemData) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <ReactModal
@@ -39,13 +44,13 @@ const EmblemModal = () => {
         color="rgb(58, 69, 112)"
         onClick={closeModal}
       />
-      <h2 className="emblem-title-modal">{state.emblem.name}</h2>
+      <h2 className="emblem-title-modal">{emblemData.name}</h2>
       <img
         className="emblem-image-modal"
         src={
-          state.emblem.imageUrl &&
+          emblemData.imageUrl &&
           generateUrl(
-            state.emblem.imageUrl.replace(
+            emblemData.imageUrl.replace(
               /g\/\d*px/g,
               `g/${
                 window.innerWidth < window.innerHeight
@@ -55,15 +60,15 @@ const EmblemModal = () => {
             )
           )
         }
-        alt={`Armoiries ${state.emblem.name}`}
+        alt={`Armoiries ${emblemData.name}`}
       />
-      {state.emblem.credits && (
+      {emblemData.credits && (
         <div className="credit-wikipedia-modal">
           Crédits :{' '}
           <span
             className="credit-value-wikipedia-modal"
             dangerouslySetInnerHTML={{
-              __html: state.emblem.credits.replaceAll(
+              __html: emblemData.credits.replaceAll(
                 '<a ',
                 '<a target="_blank" '
               ),
@@ -74,17 +79,17 @@ const EmblemModal = () => {
       <div
         dangerouslySetInnerHTML={{
           __html:
-            state.emblem.description &&
-            state.emblem.description.replace(
+            emblemData.description &&
+            emblemData.description.replace(
               /href="\//gim,
               'target="_blank" rel="noopener noreferrer" href="https://fr.wikipedia.org/'
             ),
         }}
       />
-      {state.emblem.sourceUrl && (
+      {emblemData.sourceUrl && (
         <div className="link-wikipedia-modal">
           <a
-            href={state.emblem.sourceUrl}
+            href={emblemData.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
