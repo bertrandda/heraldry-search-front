@@ -4,7 +4,7 @@ const path = require('path');
 const express = require('express');
 
 const { getObject } = require('./lib/S3Client')
-const { generateOgUrl, generateUrl } = require('./lib/image')
+const { generateWikipediaImageUrl, generateUrl } = require('./lib/image')
 
 const app = express();
 
@@ -23,11 +23,19 @@ app.get('/*', async (req, res, next) => {
     const emblemJson = JSON.parse(emblem.toString())
     htmlData = htmlData.replaceAll(
       'content="Armorial de France">',
-      `content="${emblemJson.name}">`
+      `content="Armorial de France - ${emblemJson.name}">`
     );
     htmlData = htmlData.replaceAll(
-      'content="/icon-512.png">',
-      `content="${generateUrl(generateOgUrl(emblemJson.imageUrl))}">`
+      '<meta property="og:url" content="https://armorial.bertranddaure.fr">',
+      `<meta property="og:url" content="https://armorial.bertranddaure.fr${req.path}">`
+    );
+    htmlData = htmlData.replaceAll(
+      '<meta property="og:image" content="/icon-512.png">',
+      `<meta property="og:image" content="${generateUrl(generateWikipediaImageUrl(emblemJson.imageUrl, 512), 1200, 627)}">`
+    );
+    htmlData = htmlData.replaceAll(
+      '<meta name="twitter:image" content="/icon-512.png">',
+      `<meta name="twitter:image" content="${generateUrl(generateWikipediaImageUrl(emblemJson.imageUrl, 512), 700, 700)}">`
     );
     htmlData = htmlData.replace(
       '<script>window.__EMBLEM_DATA__=""</script>',
