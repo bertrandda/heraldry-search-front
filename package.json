@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.405.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@fontsource/hind": "^5.0.8",
     "@fontsource/open-sans": "^5.0.8",
     "@mdi/js": "^7.2.96",
     "@mdi/react": "^1.6.1",
+    "@mui/material": "^5.14.11",
     "algoliasearch": "4.19.1",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",

@@ -1,5 +1,6 @@
 import { mdiCheckAll, mdiClose, mdiOpenInNew, mdiShareVariant } from '@mdi/js';
 import Icon from '@mdi/react';
+import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
@@ -16,13 +17,26 @@ const EmblemModal = () => {
   const closeModal = () => navigate('/');
 
   const [shareIcon, setShareIcon] = useState(mdiShareVariant);
+  const [shareIconTimeout, setShareIconTimeout] = useState(null);
+  const [shareIconText, setShareIconText] = useState('Lien de partage');
   const [emblemData] = useState(state?.emblem || window?.__EMBLEM_DATA__);
 
   const copyShareLink = () => {
     navigator.clipboard.writeText(`${process.env.REACT_APP_HOST}${pathname}`);
     setShareIcon(mdiCheckAll);
+    setShareIconText('Copié');
 
-    setTimeout(() => setShareIcon(mdiShareVariant), 1000);
+    if (shareIconTimeout) {
+      clearTimeout(shareIconTimeout);
+    }
+
+    setShareIconTimeout(
+      setTimeout(() => {
+        setShareIcon(mdiShareVariant);
+        setShareIconText('Lien de partage');
+        setShareIconTimeout(null);
+      }, 1500)
+    );
   };
 
   if (!emblemData) {
@@ -104,13 +118,15 @@ const EmblemModal = () => {
         </div>
       )}
       {process.env.REACT_APP_HOST && (
-        <Icon
-          className="share-link-icon"
-          path={shareIcon}
-          size={0.9}
-          title="Copier le lien de partage"
-          onClick={copyShareLink}
-        />
+        <Tooltip title={shareIconText} placement="top" arrow={true}>
+          <Icon
+            className="share-link-icon"
+            path={shareIcon}
+            size={0.9}
+            aria-disabled={true}
+            onClick={copyShareLink}
+          />
+        </Tooltip>
       )}
     </ReactModal>
   );
