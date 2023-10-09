@@ -13,6 +13,8 @@ ReactModal.setAppElement('#root');
 
 const EmblemModal = () => {
   const HOST = window.location.origin;
+  // eslint-disable-next-line no-console
+  console.log(HOST, window.location);
 
   const { state, pathname } = useLocation();
   const navigate = useNavigate();
