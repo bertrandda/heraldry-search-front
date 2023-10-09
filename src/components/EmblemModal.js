@@ -12,6 +12,8 @@ import './EmblemModal.css';
 ReactModal.setAppElement('#root');
 
 const EmblemModal = () => {
+  const HOST = window.location.origin;
+
   const { state, pathname } = useLocation();
   const navigate = useNavigate();
   const closeModal = () => navigate('/');
@@ -22,7 +24,7 @@ const EmblemModal = () => {
   const [emblemData] = useState(state?.emblem || window?.__EMBLEM_DATA__);
 
   const copyShareLink = () => {
-    navigator.clipboard.writeText(`${process.env.REACT_APP_HOST}${pathname}`);
+    navigator.clipboard.writeText(`${HOST}${pathname}`);
     setShareIcon(mdiCheckAll);
     setShareIconText('Copié');
 
@@ -117,7 +119,7 @@ const EmblemModal = () => {
           </a>
         </div>
       )}
-      {process.env.REACT_APP_HOST && (
+      {HOST && (
         <Tooltip title={shareIconText} placement="top" arrow={true}>
           <Icon
             className="share-link-icon"
