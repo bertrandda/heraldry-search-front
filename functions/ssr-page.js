@@ -55,13 +55,10 @@ const generateUrl = (sourceUrl, width, height) => {
 };
 
 export default async function handler(req, context) {
-  console.log('Start SSR', req)
   const { pathname } = new URL(req.url);
 
   const response = await context.next();
-  console.log('response', response)
   let htmlData = await response.text();
-  console.log('htmlData', htmlData)
 
   try {
     const emblem = await getObject(`${pathname}.json`.replace(/^\//, ''));
