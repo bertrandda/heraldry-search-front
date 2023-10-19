@@ -3,10 +3,15 @@ import Icon from '@mdi/react';
 import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import ReactModal from 'react-modal';
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 
-import { generateUrl } from '../helpers/image';
+import {
+  generateLargeUrl,
+  generateUrl,
+  generateUrlWithPadding,
+} from '../helpers/image';
 import './EmblemModal.css';
 
 ReactModal.setAppElement('#root');
@@ -53,6 +58,33 @@ const EmblemModal = () => {
       contentLabel="emblem-modal"
       onRequestClose={closeModal}
     >
+      <Helmet>
+        <meta
+          property="og:title"
+          content={`Armorial de France - ${emblemData.name}`}
+        />
+        <meta
+          name="twitter:title"
+          content={`Armorial de France - ${emblemData.name}`}
+        />
+        <meta property="og:url" content={`${HOST}${pathname}`}></meta>
+        <meta
+          property="og:image"
+          content={`${generateUrlWithPadding(
+            generateLargeUrl(emblemData.imageUrl, 512, false),
+            1200,
+            627
+          )}`}
+        />
+        <meta
+          name="twitter:image"
+          content={`${generateUrlWithPadding(
+            generateLargeUrl(emblemData.imageUrl, 512, false),
+            700,
+            700
+          )}`}
+        ></meta>
+      </Helmet>
       <Icon
         className="close-modal"
         path={mdiClose}

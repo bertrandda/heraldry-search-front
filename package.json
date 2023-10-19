@@ -22,6 +22,7 @@
     "medium-zoom": "^1.0.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-helmet": "^6.1.0",
     "react-instantsearch-dom": "^6.40.4",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.15.0",

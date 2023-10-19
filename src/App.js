@@ -2,6 +2,7 @@ import { mdiGithub } from '@mdi/js';
 import Icon from '@mdi/react';
 import algoliasearch from 'algoliasearch/lite';
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import {
   InstantSearch,
   Configure,
@@ -48,6 +49,16 @@ const App = () => {
       searchClient={searchClient}
       indexName={process.env.REACT_APP_ALGOLIA_INDEX}
     >
+      <Helmet>
+        <meta property="og:title" content={`Armorial de France`} />
+        <meta name="twitter:title" content={`Armorial de France`} />
+        <meta
+          property="og:url"
+          content="https://armorial.bertranddaure.fr"
+        ></meta>
+        <meta property="og:image" content="/icon-og.png" />
+        <meta name="twitter:image" content="/icon-twitter.png"></meta>
+      </Helmet>
       <header className="header">
         <div className="header-title-container">
           <h1 className="header-title">Armorial de France</h1>
