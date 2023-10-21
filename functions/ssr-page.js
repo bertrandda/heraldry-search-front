@@ -63,6 +63,7 @@ export default async function handler(req, context) {
       `<script>window.__EMBLEM_DATA__ = ${emblem.toString()}</script>`
     );
   } catch (error) {
+    console.log(error)
     console.log(`No emblem associated for path ${pathname}`);
     const url = new URL('/', req.url);
 

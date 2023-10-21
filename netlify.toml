@@ -8,6 +8,12 @@
   function = "ssr-page"
 
 [[redirects]]
+  from = "https://armorial.bertranddaure.fr/*"
+  to = "https://armorialdefrance.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "index.html"
   status = 200
