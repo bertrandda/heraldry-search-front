@@ -50,11 +50,23 @@ const App = () => {
       indexName={process.env.REACT_APP_ALGOLIA_INDEX}
     >
       <Helmet>
-        <meta property="og:title" content={`Armorial de France`} />
-        <meta name="twitter:title" content={`Armorial de France`} />
-        <meta property="og:url" content="https://armorialdefrance.org"></meta>
+        <meta property="og:title" content="Armorial de France" />
+        <meta name="twitter:title" content="Armorial de France" />
+        <meta
+          name="description"
+          content="Trouvez le blason que vous voulez grâce à un moteur de recherche puissant contenant les blasons de villes, de villages et de familles de France."
+        />
+        <meta
+          property="og:description"
+          content="Trouvez le blason que vous voulez grâce à un moteur de recherche puissant contenant les blasons de villes, de villages et de familles de France."
+        />
+        <meta
+          name="twitter:description"
+          content="Trouvez le blason que vous voulez grâce à un moteur de recherche puissant contenant les blasons de villes, de villages et de familles de France."
+        />
+        <meta property="og:url" content="https://armorialdefrance.org" />
         <meta property="og:image" content="/icon-og.png" />
-        <meta name="twitter:image" content="/icon-twitter.png"></meta>
+        <meta name="twitter:image" content="/icon-twitter.png" />
       </Helmet>
       <header className="header">
         <div className="header-title-container">
