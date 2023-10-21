@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
-import { ModalContext } from '../contexts/ModalContext';
 import { generateUrl } from '../helpers/image';
 import './EmblemItem.css';
 
 const EmblemItem = ({ hit, zoom }) => {
-  const { showModal } = useContext(ModalContext);
   const zoomRef = useRef(zoom);
 
   const attachZoom = (image) => {
@@ -24,17 +23,16 @@ const EmblemItem = ({ hit, zoom }) => {
           ref={attachZoom}
         />
       </div>
-      <span
+      <Link
         className="emblem-info-container"
         role="button"
         tabIndex={0}
-        onClick={() => {
-          showModal(hit);
-        }}
+        to={hit.path}
+        state={{ emblem: hit }}
       >
         <h1 className="emblem-title">{hit.name}</h1>
         <p className="emblem-description">{hit.descriptionText}</p>
-      </span>
+      </Link>
     </article>
   );
 };

@@ -33,6 +33,18 @@
   cursor: pointer;
 }
 
+.share-link-icon {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  color: rgb(156, 156, 156);
+}
+
+.share-link-icon:hover {
+  cursor: pointer;
+  color: black;
+}
+
 .emblem-title-modal {
   text-align: center;
 }

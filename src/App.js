@@ -1,5 +1,8 @@
+import { mdiGithub } from '@mdi/js';
+import Icon from '@mdi/react';
 import algoliasearch from 'algoliasearch/lite';
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import {
   InstantSearch,
   Configure,
@@ -7,10 +10,9 @@ import {
   Pagination,
   PoweredBy,
 } from 'react-instantsearch-dom';
+import { Outlet } from 'react-router-dom';
 
 import CustomHit from './components/CustomHits';
-import EmblemModal from './components/EmblemModal';
-import { ModalContextProvider } from './contexts/ModalContext';
 
 import '@fontsource/hind';
 import './App.css';
@@ -47,6 +49,25 @@ const App = () => {
       searchClient={searchClient}
       indexName={process.env.REACT_APP_ALGOLIA_INDEX}
     >
+      <Helmet>
+        <meta property="og:title" content="Armorial de France" />
+        <meta name="twitter:title" content="Armorial de France" />
+        <meta
+          name="description"
+          content="Trouvez le blason que vous voulez grâce à un moteur de recherche puissant contenant les blasons de villes, de villages et de familles de France."
+        />
+        <meta
+          property="og:description"
+          content="Trouvez le blason que vous voulez grâce à un moteur de recherche puissant contenant les blasons de villes, de villages et de familles de France."
+        />
+        <meta
+          name="twitter:description"
+          content="Trouvez le blason que vous voulez grâce à un moteur de recherche puissant contenant les blasons de villes, de villages et de familles de France."
+        />
+        <meta property="og:url" content="https://armorialdefrance.org" />
+        <meta property="og:image" content="/icon-og.png" />
+        <meta name="twitter:image" content="/icon-twitter.png" />
+      </Helmet>
       <header className="header">
         <div className="header-title-container">
           <h1 className="header-title">Armorial de France</h1>
@@ -82,20 +103,27 @@ const App = () => {
         {process.env.REACT_APP_SEARCH_SERVICE === 'algolia' && <PoweredBy />}
       </header>
 
-      <ModalContextProvider>
-        <div className="container">
-          <div className="search-panel">
-            <div className="search-panel__results">
-              <Configure hitsPerPage={18} />
-              <CustomHit />
-              <div className="pagination">
-                <Pagination />
-              </div>
+      <div className="container">
+        <div className="search-panel">
+          <div className="search-panel__results">
+            <Configure hitsPerPage={18} />
+            <CustomHit />
+            <div className="pagination">
+              <Pagination />
             </div>
           </div>
         </div>
-        <EmblemModal />
-      </ModalContextProvider>
+        <div className="link-github">
+          <a
+            href="https://github.com/bertrandda/heraldry-search-front"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon className="link-github-icon" path={mdiGithub} size={0.8} />
+          </a>
+        </div>
+      </div>
+      <Outlet />
     </InstantSearch>
   );
 };

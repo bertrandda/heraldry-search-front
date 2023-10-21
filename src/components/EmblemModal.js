@@ -1,40 +1,116 @@
-import { mdiClose, mdiLinkVariant } from '@mdi/js';
+import { mdiCheckAll, mdiClose, mdiOpenInNew, mdiShareVariant } from '@mdi/js';
 import Icon from '@mdi/react';
+import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import ReactModal from 'react-modal';
+import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 
-import { ModalContext } from '../contexts/ModalContext';
-import { generateUrl } from '../helpers/image';
+import {
+  generateLargeUrl,
+  generateUrl,
+  generateUrlWithPadding,
+} from '../helpers/image';
 import './EmblemModal.css';
 
 ReactModal.setAppElement('#root');
 
 const EmblemModal = () => {
-  const { modalInfo, hideModal } = useContext(ModalContext);
+  const HOST = window.location.origin;
+
+  const { state, pathname } = useLocation();
+  const navigate = useNavigate();
+  const closeModal = () => navigate('/');
+
+  const [shareIcon, setShareIcon] = useState(mdiShareVariant);
+  const [shareIconTimeout, setShareIconTimeout] = useState(null);
+  const [shareIconText, setShareIconText] = useState('Lien de partage');
+  const [emblemData] = useState(state?.emblem || window?.__EMBLEM_DATA__);
+
+  const copyShareLink = () => {
+    navigator.clipboard.writeText(`${HOST}${pathname}`);
+    setShareIcon(mdiCheckAll);
+    setShareIconText('Copié');
+
+    if (shareIconTimeout) {
+      clearTimeout(shareIconTimeout);
+    }
+
+    setShareIconTimeout(
+      setTimeout(() => {
+        setShareIcon(mdiShareVariant);
+        setShareIconText('Lien de partage');
+        setShareIconTimeout(null);
+      }, 1500)
+    );
+  };
+
+  if (!emblemData) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <ReactModal
       className="emblem-modal-window"
       overlayClassName="emblem-modal"
-      isOpen={Object.keys(modalInfo).length !== 0}
+      isOpen={true}
       contentLabel="emblem-modal"
-      onRequestClose={hideModal}
+      onRequestClose={closeModal}
     >
+      <Helmet>
+        <meta
+          property="og:title"
+          content={`Armorial de France - ${emblemData.name}`}
+        />
+        <meta
+          name="twitter:title"
+          content={`Armorial de France - ${emblemData.name}`}
+        />
+        <meta
+          name="description"
+          content={emblemData.descriptionText.split('\n')[0]}
+        />
+        <meta
+          property="og:description"
+          content={emblemData.descriptionText.split('\n')[0]}
+        />
+        <meta
+          name="twitter:description"
+          content={emblemData.descriptionText.split('\n')[0]}
+        />
+        <meta property="og:url" content={`${HOST}${pathname}`}></meta>
+        <meta
+          property="og:image"
+          content={`${generateUrlWithPadding(
+            generateLargeUrl(emblemData.imageUrl, 512, false),
+            1200,
+            627
+          )}`}
+        />
+        <meta
+          name="twitter:image"
+          content={`${generateUrlWithPadding(
+            generateLargeUrl(emblemData.imageUrl, 512, false),
+            700,
+            700
+          )}`}
+        ></meta>
+      </Helmet>
       <Icon
         className="close-modal"
         path={mdiClose}
         size={1}
         color="rgb(58, 69, 112)"
-        onClick={hideModal}
+        onClick={closeModal}
       />
-      <h2 className="emblem-title-modal">{modalInfo.name}</h2>
+      <h2 className="emblem-title-modal">{emblemData.name}</h2>
       <img
         className="emblem-image-modal"
         src={
-          modalInfo.imageUrl &&
+          emblemData.imageUrl &&
           generateUrl(
-            modalInfo.imageUrl.replace(
+            emblemData.imageUrl.replace(
               /g\/\d*px/g,
               `g/${
                 window.innerWidth < window.innerHeight
@@ -44,15 +120,15 @@ const EmblemModal = () => {
             )
           )
         }
-        alt={`Armoiries ${modalInfo.name}`}
+        alt={`Armoiries ${emblemData.name}`}
       />
-      {modalInfo.credits && (
+      {emblemData.credits && (
         <div className="credit-wikipedia-modal">
           Crédits :{' '}
           <span
             className="credit-value-wikipedia-modal"
             dangerouslySetInnerHTML={{
-              __html: modalInfo.credits.replaceAll(
+              __html: emblemData.credits.replaceAll(
                 '<a ',
                 '<a target="_blank" '
               ),
@@ -63,28 +139,46 @@ const EmblemModal = () => {
       <div
         dangerouslySetInnerHTML={{
           __html:
-            modalInfo.description &&
-            modalInfo.description.replace(
+            emblemData.description &&
+            emblemData.description.replace(
               /href="\//gim,
               'target="_blank" rel="noopener noreferrer" href="https://fr.wikipedia.org/'
             ),
         }}
       />
-      {modalInfo.sourceUrl && (
+      {emblemData.sourceUrl && (
         <div className="link-wikipedia-modal">
           <a
-            href={modalInfo.sourceUrl}
+            href={emblemData.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
             Source
             <Icon
               className="link-wikipedia-icon"
-              path={mdiLinkVariant}
+              path={mdiOpenInNew}
               size={0.5}
+              title="Ouvrir dans un nouvel onglet"
             />
           </a>
         </div>
+      )}
+      {HOST && (
+        <Tooltip
+          title={shareIconText}
+          placement="top"
+          arrow={true}
+          enterTouchDelay={0}
+          leaveTouchDelay={800}
+        >
+          <Icon
+            className="share-link-icon"
+            path={shareIcon}
+            size={0.9}
+            aria-disabled={true}
+            onClick={copyShareLink}
+          />
+        </Tooltip>
       )}
     </ReactModal>
   );
