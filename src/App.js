@@ -52,10 +52,7 @@ const App = () => {
       <Helmet>
         <meta property="og:title" content={`Armorial de France`} />
         <meta name="twitter:title" content={`Armorial de France`} />
-        <meta
-          property="og:url"
-          content="https://armorial.bertranddaure.fr"
-        ></meta>
+        <meta property="og:url" content="https://armorialdefrance.org"></meta>
         <meta property="og:image" content="/icon-og.png" />
         <meta name="twitter:image" content="/icon-twitter.png"></meta>
       </Helmet>

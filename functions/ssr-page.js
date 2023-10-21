@@ -33,8 +33,8 @@ export default async function handler(req, context) {
       `content="Armorial de France - ${emblemJson.name}"`
     );
     htmlData = htmlData.replaceAll(
-      'content="https://armorial.bertranddaure.fr"',
-      `content="https://armorial.bertranddaure.fr${pathname}"`
+      'content="https://armorialdefrance.org"',
+      `content="https://armorialdefrance.org${pathname}"`
     );
     htmlData = htmlData.replaceAll(
       'content="/icon-og.png"',
