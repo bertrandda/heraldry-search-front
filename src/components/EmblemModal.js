@@ -67,9 +67,18 @@ const EmblemModal = () => {
           name="twitter:title"
           content={`Armorial de France - ${emblemData.name}`}
         />
-        <meta name="description" content={emblemData.descriptionText} />
-        <meta property="og:description" content={emblemData.descriptionText} />
-        <meta name="twitter:description" content={emblemData.descriptionText} />
+        <meta
+          name="description"
+          content={emblemData.descriptionText.split('\n')[0]}
+        />
+        <meta
+          property="og:description"
+          content={emblemData.descriptionText.split('\n')[0]}
+        />
+        <meta
+          name="twitter:description"
+          content={emblemData.descriptionText.split('\n')[0]}
+        />
         <meta property="og:url" content={`${HOST}${pathname}`}></meta>
         <meta
           property="og:image"
