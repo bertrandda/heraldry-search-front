@@ -152,7 +152,13 @@ const EmblemModal = () => {
         </div>
       )}
       {HOST && (
-        <Tooltip title={shareIconText} placement="top" arrow={true}>
+        <Tooltip
+          title={shareIconText}
+          placement="top"
+          arrow={true}
+          enterTouchDelay={0}
+          leaveTouchDelay={800}
+        >
           <Icon
             className="share-link-icon"
             path={shareIcon}
