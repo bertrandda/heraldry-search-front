@@ -43,6 +43,10 @@ export default async function handler(req, context) {
       `content="https://armorialdefrance.org${pathname}"`
     );
     htmlData = htmlData.replaceAll(
+      'href="https://armorialdefrance.org/"',
+      `href="https://armorialdefrance.org${pathname}"`
+    );
+    htmlData = htmlData.replaceAll(
       'content="/icon-og.png"',
       `content="${generateUrlWithPadding(
         generateLargeUrl(emblemJson.imageUrl, 512, false),

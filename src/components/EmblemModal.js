@@ -79,7 +79,7 @@ const EmblemModal = () => {
           name="twitter:description"
           content={emblemData.descriptionText.split('\n')[0]}
         />
-        <meta property="og:url" content={`${HOST}${pathname}`}></meta>
+        <meta property="og:url" content={`${HOST}${pathname}`} />
         <meta
           property="og:image"
           content={`${generateUrlWithPadding(
@@ -95,7 +95,11 @@ const EmblemModal = () => {
             700,
             700
           )}`}
-        ></meta>
+        />
+        <link
+          rel="canonical"
+          href={`https://armorialdefrance.org${pathname}`}
+        />
       </Helmet>
       <Icon
         className="close-modal"
