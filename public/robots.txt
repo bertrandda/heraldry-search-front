@@ -1,2 +1,4 @@
 User-Agent: *
 Disallow:
+
+Sitemap: https://armorialdefrance.org/sitemap.xml

@@ -67,6 +67,7 @@ const App = () => {
         <meta property="og:url" content="https://armorialdefrance.org" />
         <meta property="og:image" content="/icon-og.png" />
         <meta name="twitter:image" content="/icon-twitter.png" />
+        <link rel="canonical" href="https://armorialdefrance.org/" />
       </Helmet>
       <header className="header">
         <div className="header-title-container">

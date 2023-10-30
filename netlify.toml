@@ -7,6 +7,10 @@
   path = "/(famille|ville)/*"
   function = "ssr-page"
 
+[[edge_functions]]
+  path = "/sitemap.xml"
+  function = "sitemap"
+
 [[redirects]]
   from = "https://armorial.bertranddaure.fr/*"
   to = "https://armorialdefrance.org/:splat"
