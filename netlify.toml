@@ -18,6 +18,11 @@
   force = true
 
 [[redirects]]
+  from = "/scripts/partners/umami.js"
+  to = "https://cloud.umami.is/script.js"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "index.html"
   status = 200
