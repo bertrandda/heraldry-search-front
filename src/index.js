@@ -12,13 +12,17 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <App page="search" />,
     children: [
       {
         path: '*',
         element: <EmblemModal />,
       },
     ],
+  },
+  {
+    path: '/maps',
+    element: <App page="maps" />,
   },
 ]);
 

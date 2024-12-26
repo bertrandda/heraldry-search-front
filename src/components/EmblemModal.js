@@ -1,7 +1,6 @@
 import { mdiCheckAll, mdiClose, mdiOpenInNew, mdiShareVariant } from '@mdi/js';
 import Icon from '@mdi/react';
 import Tooltip from '@mui/material/Tooltip';
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import ReactModal from 'react-modal';
@@ -186,16 +185,6 @@ const EmblemModal = () => {
       )}
     </ReactModal>
   );
-};
-
-EmblemModal.propTypes = {
-  isOpen: PropTypes.bool,
-  emblem: PropTypes.object,
-};
-
-EmblemModal.defaultProps = {
-  isOpen: false,
-  emblem: {},
 };
 
 export default EmblemModal;

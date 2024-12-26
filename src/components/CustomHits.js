@@ -8,7 +8,7 @@ import './CustomHits.css';
 
 const zoom = mediumZoom();
 
-const Hits = ({ hits }) => {
+const Hits = ({ hits = [] }) => {
   const zoomRef = useRef(zoom);
   zoomRef.current.detach();
 
@@ -79,10 +79,6 @@ const CustomHits = connectHits(Hits);
 
 Hits.propTypes = {
   hits: PropTypes.array,
-};
-
-Hits.defaultProps = {
-  hits: {},
 };
 
 export default CustomHits;

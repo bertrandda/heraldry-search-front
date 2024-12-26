@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { generateUrl } from '../helpers/image';
 import './EmblemItem.css';
 
-const EmblemItem = ({ hit, zoom }) => {
+const EmblemItem = ({ hit = {}, zoom = {} }) => {
   const zoomRef = useRef(zoom);
 
   const attachZoom = (image) => {
@@ -40,11 +40,6 @@ const EmblemItem = ({ hit, zoom }) => {
 EmblemItem.propTypes = {
   hit: PropTypes.object,
   zoom: PropTypes.object,
-};
-
-EmblemItem.defaultProps = {
-  hit: {},
-  zoom: {},
 };
 
 export default EmblemItem;
