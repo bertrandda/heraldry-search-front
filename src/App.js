@@ -14,7 +14,7 @@ const App = ({ page }) => {
   useEffect(() => {}, [listView]);
 
   return (
-    <div>
+    <div className="app-container">
       <div className="header-type-container">
         <Link
           className="header-type-button"

@@ -1,7 +1,8 @@
 [build]
   command = "yarn build"
   publish = "build/"
-  edge_functions = "functions"
+  functions = "functions/basic"
+  edge_functions = "functions/edge"
 
 [[edge_functions]]
   path = "/(famille|ville)/*"

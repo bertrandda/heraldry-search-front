@@ -1,5 +1,5 @@
 import consumers from 'node:stream/consumers';
-import { generateLargeUrl, generateUrlWithPadding } from '../src/helpers/image.js'
+import { generateLargeUrl, generateUrlWithPadding } from '../../src/helpers/image.js'
 
 import { S3Client } from 'https://deno.land/x/s3_lite_client@0.6.1/mod.ts';
 

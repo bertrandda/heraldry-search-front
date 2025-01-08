@@ -1,4 +1,7 @@
+.maps-container {
+  height: 100%;
+}
+
 #map {
-  height: 100vw;
-  position: inherit !important;
+  height: 100%;
 }
