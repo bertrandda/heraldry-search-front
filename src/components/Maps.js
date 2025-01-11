@@ -16,6 +16,7 @@ const Maps = () => {
   const mapRef = useRef(null);
   const markerGroupRef = useRef(null);
   const recRef = useRef(null);
+  const timeoutRef = useRef(null);
   const [modalInfo, setModalInfo] = useState({});
 
   const fetchEmblems = async () => {
@@ -98,7 +99,15 @@ const Maps = () => {
       );
       recRef.current.addTo(map);
 
-      map.addEventListener('moveend', () => fetchEmblems());
+      map.on('movestart', () => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+      });
+      map.on(
+        'moveend',
+        () => (timeoutRef.current = setTimeout(fetchEmblems, 500))
+      );
 
       mapRef.current = map;
     }
