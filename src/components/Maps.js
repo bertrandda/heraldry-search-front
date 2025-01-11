@@ -1,7 +1,12 @@
 import L from 'leaflet';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Outlet } from 'react-router-dom';
+
+import { searchInBbox } from '../helpers/algolia';
+import { generateUrl } from '../helpers/image';
+
+import EmblemModal from './EmblemModal';
 
 import '@fontsource/hind';
 import 'leaflet/dist/leaflet.css';
@@ -9,9 +14,11 @@ import './Maps.css';
 
 const Maps = () => {
   const mapRef = useRef(null);
+  const markerGroupRef = useRef(null);
   const recRef = useRef(null);
+  const [modalInfo, setModalInfo] = useState({});
 
-  const fetchEmblem = () => {
+  const fetchEmblems = async () => {
     const bounds = mapRef.current.getBounds().pad(-0.1);
 
     let crop;
@@ -24,11 +31,38 @@ const Maps = () => {
     }
 
     const boundCrop = [
-      [bounds.getNorth().toFixed(crop), bounds.getEast().toFixed(crop)],
-      [bounds.getSouth().toFixed(crop), bounds.getWest().toFixed(crop)],
+      [
+        Number(bounds.getNorth().toFixed(crop)),
+        Number(bounds.getEast().toFixed(crop)),
+      ],
+      [
+        Number(bounds.getSouth().toFixed(crop)),
+        Number(bounds.getWest().toFixed(crop)),
+      ],
     ];
     // for now only display rectangle
     recRef.current.setBounds(boundCrop);
+    const { hits } = await searchInBbox(boundCrop);
+
+    markerGroupRef.current.clearLayers();
+
+    const x = 60;
+    const y = 66;
+
+    hits.map((hit) => {
+      const marker = L.marker([hit._geoloc.lat, hit._geoloc.lng], {
+        icon: L.icon({
+          iconUrl: generateUrl(hit.imageUrl),
+          iconSize: [x, y],
+          iconAnchor: [x / 2, y / 2],
+        }),
+        alt: hit.name,
+      })
+        .addTo(markerGroupRef.current)
+        .on('click', () => setModalInfo(hit));
+
+      return marker;
+    });
   };
 
   useEffect(() => {
@@ -54,6 +88,7 @@ const Maps = () => {
         })
         .addTo(map);
 
+      markerGroupRef.current = L.layerGroup().addTo(map);
       recRef.current = L.rectangle(
         [
           [54.559322, -5.767822],
@@ -63,7 +98,7 @@ const Maps = () => {
       );
       recRef.current.addTo(map);
 
-      map.addEventListener('moveend', () => fetchEmblem());
+      map.addEventListener('moveend', () => fetchEmblems());
 
       mapRef.current = map;
     }
@@ -93,6 +128,7 @@ const Maps = () => {
       </Helmet>
       <div id="map"></div>
       <Outlet />
+      <EmblemModal emblem={modalInfo} />
     </div>
   );
 };

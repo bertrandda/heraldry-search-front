@@ -1,7 +1,7 @@
 import { mdiCheckAll, mdiClose, mdiOpenInNew, mdiShareVariant } from '@mdi/js';
 import Icon from '@mdi/react';
 import Tooltip from '@mui/material/Tooltip';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import ReactModal from 'react-modal';
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
@@ -15,20 +15,35 @@ import './EmblemModal.css';
 
 ReactModal.setAppElement('#root');
 
-const EmblemModal = () => {
+const EmblemModal = ({ emblem }) => {
   const HOST = window.location.origin;
 
   const { state, pathname } = useLocation();
   const navigate = useNavigate();
-  const closeModal = () => navigate('/');
 
   const [shareIcon, setShareIcon] = useState(mdiShareVariant);
   const [shareIconTimeout, setShareIconTimeout] = useState(null);
   const [shareIconText, setShareIconText] = useState('Lien de partage');
-  const [emblemData] = useState(state?.emblem || window?.__EMBLEM_DATA__);
+  const [emblemData, setEmblemData] = useState(
+    state?.emblem || emblem || window?.__EMBLEM_DATA__
+  );
+
+  useEffect(() => {
+    if (emblem) {
+      setEmblemData(emblem);
+    }
+  }, [emblem]);
+
+  const closeModal = () => {
+    setEmblemData({});
+
+    if (pathname !== '/maps') {
+      navigate('/');
+    }
+  };
 
   const copyShareLink = () => {
-    navigator.clipboard.writeText(`${HOST}${pathname}`);
+    navigator.clipboard.writeText(`${HOST}${emblemData.path}`);
     setShareIcon(mdiCheckAll);
     setShareIconText('Copié');
 
@@ -45,7 +60,7 @@ const EmblemModal = () => {
     );
   };
 
-  if (!emblemData) {
+  if (!emblemData?.path && pathname !== '/maps') {
     return <Navigate to="/" />;
   }
 
@@ -53,53 +68,55 @@ const EmblemModal = () => {
     <ReactModal
       className="emblem-modal-window"
       overlayClassName="emblem-modal"
-      isOpen={true}
+      isOpen={Boolean(emblemData?.path)}
       contentLabel="emblem-modal"
       onRequestClose={closeModal}
     >
-      <Helmet>
-        <meta
-          property="og:title"
-          content={`Armorial de France - ${emblemData.name}`}
-        />
-        <meta
-          name="twitter:title"
-          content={`Armorial de France - ${emblemData.name}`}
-        />
-        <meta
-          name="description"
-          content={emblemData.descriptionText.split('\n')[0]}
-        />
-        <meta
-          property="og:description"
-          content={emblemData.descriptionText.split('\n')[0]}
-        />
-        <meta
-          name="twitter:description"
-          content={emblemData.descriptionText.split('\n')[0]}
-        />
-        <meta property="og:url" content={`${HOST}${pathname}`} />
-        <meta
-          property="og:image"
-          content={`${generateUrlWithPadding(
-            generateLargeUrl(emblemData.imageUrl, 512, false),
-            1200,
-            627
-          )}`}
-        />
-        <meta
-          name="twitter:image"
-          content={`${generateUrlWithPadding(
-            generateLargeUrl(emblemData.imageUrl, 512, false),
-            700,
-            700
-          )}`}
-        />
-        <link
-          rel="canonical"
-          href={`https://armorialdefrance.org${pathname}`}
-        />
-      </Helmet>
+      {emblemData?.path && pathname !== '/maps' && (
+        <Helmet>
+          <meta
+            property="og:title"
+            content={`Armorial de France - ${emblemData.name}`}
+          />
+          <meta
+            name="twitter:title"
+            content={`Armorial de France - ${emblemData.name}`}
+          />
+          <meta
+            name="description"
+            content={emblemData.descriptionText.split('\n')[0]}
+          />
+          <meta
+            property="og:description"
+            content={emblemData.descriptionText.split('\n')[0]}
+          />
+          <meta
+            name="twitter:description"
+            content={emblemData.descriptionText.split('\n')[0]}
+          />
+          <meta property="og:url" content={`${HOST}${emblemData.path}`} />
+          <meta
+            property="og:image"
+            content={`${generateUrlWithPadding(
+              generateLargeUrl(emblemData.imageUrl, 512, false),
+              1200,
+              627
+            )}`}
+          />
+          <meta
+            name="twitter:image"
+            content={`${generateUrlWithPadding(
+              generateLargeUrl(emblemData.imageUrl, 512, false),
+              700,
+              700
+            )}`}
+          />
+          <link
+            rel="canonical"
+            href={`https://armorialdefrance.org${emblemData.path}`}
+          />
+        </Helmet>
+      )}
       <Icon
         className="close-modal"
         path={mdiClose}
