@@ -22,34 +22,23 @@ const Maps = () => {
   const fetchEmblems = async () => {
     const bounds = mapRef.current.getBounds().pad(-0.1);
 
-    let crop;
-    if (mapRef.current.getZoom() < 11) {
-      crop = 1;
-    } else if (mapRef.current.getZoom() < 15) {
-      crop = 2;
-    } else {
-      crop = 3;
-    }
-
     const boundCrop = [
       [
-        Number(bounds.getNorth().toFixed(crop)),
-        Number(bounds.getEast().toFixed(crop)),
+        Number(bounds.getNorth().toFixed(3)),
+        Number(bounds.getEast().toFixed(3)),
       ],
       [
-        Number(bounds.getSouth().toFixed(crop)),
-        Number(bounds.getWest().toFixed(crop)),
+        Number(bounds.getSouth().toFixed(3)),
+        Number(bounds.getWest().toFixed(3)),
       ],
     ];
-    // for now only display rectangle
-    recRef.current.setBounds(boundCrop);
-    const { hits } = await searchInBbox(boundCrop);
 
-    markerGroupRef.current.clearLayers();
+    const { hits } = await searchInBbox(boundCrop);
 
     const x = 60;
     const y = 66;
 
+    const newMarkerGroup = L.layerGroup().addTo(mapRef.current);
     hits.map((hit) => {
       const marker = L.marker([hit._geoloc.lat, hit._geoloc.lng], {
         icon: L.icon({
@@ -59,11 +48,13 @@ const Maps = () => {
         }),
         alt: hit.name,
       })
-        .addTo(markerGroupRef.current)
+        .addTo(newMarkerGroup)
         .on('click', () => setModalInfo(hit));
 
       return marker;
     });
+    markerGroupRef.current.remove();
+    markerGroupRef.current = newMarkerGroup;
   };
 
   useEffect(() => {
@@ -110,6 +101,7 @@ const Maps = () => {
       );
 
       mapRef.current = map;
+      fetchEmblems();
     }
   }, []);
 
