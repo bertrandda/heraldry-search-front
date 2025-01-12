@@ -10,6 +10,6 @@ export const searchInBbox = (bbox) => {
 
   return index.search('', {
     insideBoundingBox: [bbox.flat()],
-    hitsPerPage: 20,
+    hitsPerPage: 15,
   });
 };

@@ -36,23 +36,24 @@ const Maps = () => {
     const { hits } = await searchInBbox(boundCrop);
 
     const x = 60;
-    const y = 66;
 
-    const newMarkerGroup = L.layerGroup().addTo(mapRef.current);
-    hits.map((hit) => {
-      const marker = L.marker([hit._geoloc.lat, hit._geoloc.lng], {
-        icon: L.icon({
-          iconUrl: generateUrl(hit.imageUrl),
-          iconSize: [x, y],
-          iconAnchor: [x / 2, y / 2],
-        }),
-        alt: hit.name,
+    const newMarkerGroup = L.layerGroup(
+      hits.map((hit) => {
+        const y =
+          hit.size?.[1] && hit.size?.[0] ? (hit.size[1] / hit.size[0]) * x : 66;
+
+        const marker = L.marker([hit._geoloc.lat, hit._geoloc.lng], {
+          icon: L.icon({
+            iconUrl: generateUrl(hit.imageUrl),
+            iconSize: [x, y],
+            iconAnchor: [x / 2, y / 2],
+          }),
+          alt: hit.name,
+        }).on('click', () => setModalInfo(hit));
+
+        return marker;
       })
-        .addTo(newMarkerGroup)
-        .on('click', () => setModalInfo(hit));
-
-      return marker;
-    });
+    ).addTo(mapRef.current);
     markerGroupRef.current.remove();
     markerGroupRef.current = newMarkerGroup;
   };
