@@ -1,8 +1,9 @@
 import L from 'leaflet';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Outlet } from 'react-router-dom';
 
+import { ModalContext } from '../contexts/ModalContext';
 import { searchInBbox } from '../helpers/algolia';
 import { generateUrl } from '../helpers/image';
 
@@ -17,7 +18,7 @@ const Maps = () => {
   const markerGroupRef = useRef(null);
   const recRef = useRef(null);
   const timeoutRef = useRef(null);
-  const [modalInfo, setModalInfo] = useState({});
+  const { showModal } = useContext(ModalContext);
 
   const fetchEmblems = async () => {
     const bounds = mapRef.current.getBounds().pad(-0.1);
@@ -49,7 +50,7 @@ const Maps = () => {
             iconAnchor: [x / 2, y / 2],
           }),
           alt: hit.name,
-        }).on('click', () => setModalInfo(hit));
+        }).on('click', () => showModal(hit));
 
         return marker;
       })
@@ -104,6 +105,7 @@ const Maps = () => {
       mapRef.current = map;
       fetchEmblems();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -130,7 +132,7 @@ const Maps = () => {
       </Helmet>
       <div id="map"></div>
       <Outlet />
-      <EmblemModal emblem={modalInfo} />
+      <EmblemModal />
     </div>
   );
 };

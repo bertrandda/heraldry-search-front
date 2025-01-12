@@ -3,10 +3,12 @@ import Icon from '@mdi/react';
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-import '@fontsource/hind';
-import './App.css';
 import Maps from './components/Maps';
 import Search from './components/Search';
+import { ModalContextProvider } from './contexts/ModalContext';
+
+import '@fontsource/hind';
+import './App.css';
 
 const App = ({ page }) => {
   const [listView, setListView] = useState(page === 'search');
@@ -49,7 +51,11 @@ const App = ({ page }) => {
       </div>
       <Outlet />
       {page === 'search' && <Search />}
-      {page === 'maps' && <Maps />}
+      {page === 'maps' && (
+        <ModalContextProvider>
+          <Maps />
+        </ModalContextProvider>
+      )}
     </div>
   );
 };

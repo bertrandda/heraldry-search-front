@@ -1,11 +1,12 @@
 import { mdiCheckAll, mdiClose, mdiOpenInNew, mdiShareVariant } from '@mdi/js';
 import Icon from '@mdi/react';
 import Tooltip from '@mui/material/Tooltip';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import ReactModal from 'react-modal';
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 
+import { ModalContext } from '../contexts/ModalContext';
 import {
   generateLargeUrl,
   generateUrl,
@@ -15,9 +16,10 @@ import './EmblemModal.css';
 
 ReactModal.setAppElement('#root');
 
-const EmblemModal = ({ emblem }) => {
+const EmblemModal = () => {
   const HOST = window.location.origin;
 
+  const { modalInfo, hideModal } = useContext(ModalContext);
   const { state, pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -25,17 +27,17 @@ const EmblemModal = ({ emblem }) => {
   const [shareIconTimeout, setShareIconTimeout] = useState(null);
   const [shareIconText, setShareIconText] = useState('Lien de partage');
   const [emblemData, setEmblemData] = useState(
-    state?.emblem || emblem || window?.__EMBLEM_DATA__
+    state?.emblem || modalInfo || window?.__EMBLEM_DATA__
   );
 
   useEffect(() => {
-    if (emblem) {
-      setEmblemData(emblem);
+    if (modalInfo) {
+      setEmblemData(modalInfo);
     }
-  }, [emblem]);
+  }, [modalInfo]);
 
   const closeModal = () => {
-    setEmblemData({});
+    hideModal();
 
     if (pathname !== '/maps') {
       navigate('/');
