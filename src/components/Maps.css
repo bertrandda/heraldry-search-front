@@ -5,3 +5,22 @@
 #map {
   height: 100%;
 }
+
+.leaflet-bottom {
+  z-index: 500;
+}
+
+.leaflet-control-zoom {
+  border-radius: 34px;
+}
+
+.leaflet-control-zoom-in {
+  border-top-left-radius: 34px !important;
+  border-top-right-radius: 34px !important;
+  border-bottom: none !important;
+}
+
+.leaflet-control-zoom-out {
+  border-bottom-left-radius: 34px !important;
+  border-bottom-right-radius: 34px !important;
+}
