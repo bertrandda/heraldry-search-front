@@ -37,6 +37,17 @@ if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
   };
 }
 
+let timerId = undefined;
+const timeout = 500;
+
+const queryHook = (query, search) => {
+  if (timerId) {
+    clearTimeout(timerId);
+  }
+
+  timerId = setTimeout(() => search(query), timeout);
+};
+
 const Search = () => {
   return (
     <InstantSearch
@@ -92,6 +103,7 @@ const Search = () => {
             </svg>
           )}
           placeholder={'Parti, de gueules, Toulouse...'}
+          queryHook={queryHook}
         />
         {process.env.REACT_APP_SEARCH_SERVICE === 'algolia' && <PoweredBy />}
       </header>
