@@ -1,15 +1,18 @@
-import algoliasearch from 'algoliasearch';
+import { liteClient } from 'algoliasearch/lite';
 
 export const searchInBbox = (bbox) => {
-  const searchClient = algoliasearch(
+  const searchClient = liteClient(
     process.env.REACT_APP_ALGOLIA_APP_ID,
     process.env.REACT_APP_ALGOLIA_API_KEY
   );
 
-  const index = searchClient.initIndex(process.env.REACT_APP_ALGOLIA_INDEX);
-
-  return index.search('', {
-    insideBoundingBox: [bbox.flat()],
-    hitsPerPage: 15,
+  return searchClient.search({
+    requests: [
+      {
+        indexName: process.env.REACT_APP_ALGOLIA_INDEX,
+        insideBoundingBox: [bbox.flat()],
+        hitsPerPage: 15,
+      },
+    ],
   });
 };

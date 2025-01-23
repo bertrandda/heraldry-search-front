@@ -34,7 +34,9 @@ const Maps = () => {
       ],
     ];
 
-    const { hits } = await searchInBbox(boundCrop);
+    const {
+      results: [{ hits }],
+    } = await searchInBbox(boundCrop);
 
     const x = 60;
 

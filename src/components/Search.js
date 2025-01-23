@@ -1,7 +1,7 @@
 import { mdiGithub } from '@mdi/js';
 import Icon from '@mdi/react';
-import algoliasearch from 'algoliasearch/lite';
-import React, { useEffect } from 'react';
+import { liteClient } from 'algoliasearch/lite';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import {
   InstantSearch,
@@ -9,7 +9,7 @@ import {
   SearchBox,
   Pagination,
   PoweredBy,
-} from 'react-instantsearch-dom';
+} from 'react-instantsearch';
 import { Outlet } from 'react-router-dom';
 
 import CustomHit from './CustomHits';
@@ -20,7 +20,7 @@ import './Search.css';
 let searchClient;
 
 if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
-  searchClient = algoliasearch(
+  searchClient = liteClient(
     process.env.REACT_APP_ALGOLIA_APP_ID,
     process.env.REACT_APP_ALGOLIA_API_KEY
   );
@@ -38,12 +38,6 @@ if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
 }
 
 const Search = () => {
-  useEffect(() => {
-    document
-      .getElementsByClassName('ais-SearchBox-input')[0]
-      .setAttribute('aria-label', 'Recherche');
-  }, []);
-
   return (
     <InstantSearch
       searchClient={searchClient}
@@ -76,10 +70,7 @@ const Search = () => {
         </div>
         <SearchBox
           className="searchbox"
-          translations={{
-            placeholder: 'Parti, de gueules, famille...',
-          }}
-          submit={
+          submitIconComponent={() => (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -99,7 +90,8 @@ const Search = () => {
                 <path d="M16 16l-3.87-3.87" />
               </g>
             </svg>
-          }
+          )}
+          placeholder={'Parti, de gueules, Toulouse...'}
         />
         {process.env.REACT_APP_SEARCH_SERVICE === 'algolia' && <PoweredBy />}
       </header>
