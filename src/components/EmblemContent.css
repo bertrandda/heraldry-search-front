@@ -1,0 +1,47 @@
+.share-link-icon {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  color: rgb(156, 156, 156);
+}
+
+.share-link-icon:hover {
+  cursor: pointer;
+  color: black;
+}
+
+.emblem-title-modal {
+  text-align: center;
+}
+
+.emblem-image-modal {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 100%;
+  max-width: 18rem;
+}
+
+.credit-wikipedia-modal {
+  text-align: center;
+  font-weight: lighter;
+  font-size: 0.8em;
+  margin: 5px;
+}
+
+.link-wikipedia-modal {
+  text-align: center;
+  font-size: 0.8em;
+  margin: 5px;
+}
+
+.link-wikipedia-modal a {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+.link-wikipedia-icon {
+  margin-left: 3px;
+  margin-right: 3px;
+}

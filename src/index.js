@@ -6,19 +6,12 @@ import 'instantsearch.css/themes/algolia-min.css';
 import './index.css';
 
 import App from './App';
-import EmblemModal from './components/EmblemModal';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/*',
     element: <App page="search" />,
-    children: [
-      {
-        path: '*',
-        element: <EmblemModal />,
-      },
-    ],
   },
   {
     path: '/maps',

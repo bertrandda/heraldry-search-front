@@ -7,8 +7,6 @@ import { ModalContext } from '../contexts/ModalContext';
 import { searchInBbox } from '../helpers/algolia';
 import { generateUrl } from '../helpers/image';
 
-import EmblemModal from './EmblemModal';
-
 import '@fontsource/hind';
 import 'leaflet/dist/leaflet.css';
 import './Maps.css';
@@ -134,7 +132,6 @@ const Maps = () => {
       </Helmet>
       <div id="map"></div>
       <Outlet />
-      <EmblemModal />
     </div>
   );
 };

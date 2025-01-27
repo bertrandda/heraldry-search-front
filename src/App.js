@@ -3,9 +3,11 @@ import Icon from '@mdi/react';
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
+import EmblemModal from './components/EmblemModal';
 import Maps from './components/Maps';
 import Search from './components/Search';
 import { ModalContextProvider } from './contexts/ModalContext';
+import { PageContextProvider } from './contexts/PageContext';
 
 import '@fontsource/hind';
 import './App.css';
@@ -50,12 +52,13 @@ const App = ({ page }) => {
         </Link>
       </div>
       <Outlet />
-      {page === 'search' && <Search />}
-      {page === 'maps' && (
+      <PageContextProvider emblemInfo={window.__EMBLEM_DATA__}>
         <ModalContextProvider>
-          <Maps />
+          {page === 'search' && <Search />}
+          {page === 'maps' && <Maps />}
+          <EmblemModal />
         </ModalContextProvider>
-      )}
+      </PageContextProvider>
     </div>
   );
 };

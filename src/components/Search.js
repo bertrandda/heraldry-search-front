@@ -1,18 +1,19 @@
 import { mdiGithub } from '@mdi/js';
 import Icon from '@mdi/react';
 import { liteClient } from 'algoliasearch/lite';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import {
   InstantSearch,
-  Configure,
   SearchBox,
-  Pagination,
   PoweredBy,
+  Configure,
 } from 'react-instantsearch';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import CustomHit from './CustomHits';
+import { PageContext } from '../contexts/PageContext';
+
+import PageContent from './PageContent';
 
 import '@fontsource/hind';
 import './Search.css';
@@ -20,10 +21,35 @@ import './Search.css';
 let searchClient;
 
 if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
-  searchClient = liteClient(
+  const algoliaClient = liteClient(
     process.env.REACT_APP_ALGOLIA_APP_ID,
     process.env.REACT_APP_ALGOLIA_API_KEY
   );
+  searchClient = {
+    ...algoliaClient,
+    search(requests) {
+      if (
+        window?.__EMBLEM_DATA__ &&
+        requests.every(({ params }) => !params.query)
+      ) {
+        return Promise.resolve({
+          results: requests.map(() => ({
+            hits: [],
+            nbHits: 0,
+            nbPages: 0,
+            page: 0,
+            processingTimeMS: 0,
+            hitsPerPage: 0,
+            exhaustiveNbHits: false,
+            query: '',
+            params: '',
+          })),
+        });
+      }
+
+      return algoliaClient.search(requests);
+    },
+  };
 } else if (process.env.REACT_APP_SEARCH_SERVICE === 'custom') {
   searchClient = {
     search: (requests) =>
@@ -40,15 +66,28 @@ if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
 let timerId = undefined;
 const timeout = 500;
 
-const queryHook = (query, search) => {
-  if (timerId) {
-    clearTimeout(timerId);
-  }
-
-  timerId = setTimeout(() => search(query), timeout);
-};
-
 const Search = () => {
+  const { hidePage } = useContext(PageContext);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const queryHook = (query, search) => {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+
+    timerId = setTimeout(() => search(query), timeout);
+  };
+
+  const onFocus = () => {
+    delete window.__EMBLEM_DATA__;
+    hidePage();
+
+    if (pathname !== '/') {
+      navigate('/');
+    }
+  };
+
   return (
     <InstantSearch
       searchClient={searchClient}
@@ -104,20 +143,14 @@ const Search = () => {
           )}
           placeholder={'Parti, de gueules, Toulouse...'}
           queryHook={queryHook}
+          onFocus={onFocus}
         />
         {process.env.REACT_APP_SEARCH_SERVICE === 'algolia' && <PoweredBy />}
+        <Configure hitsPerPage={18} />
       </header>
 
       <div className="container">
-        <div className="search-panel">
-          <div className="search-panel__results">
-            <Configure hitsPerPage={18} />
-            <CustomHit />
-            <div className="pagination">
-              <Pagination />
-            </div>
-          </div>
-        </div>
+        <PageContent />
         <div className="link-github">
           <a
             href="https://github.com/bertrandda/heraldry-search-front"

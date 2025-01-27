@@ -87,25 +87,6 @@
   transform: translateX(13%) translateY(15%);
 }
 
-.ais-Hits-list {
-  margin-left: 0;
-  display: grid;
-  grid-gap: 2rem;
-}
-
-.ais-Hits-item {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-shadow: none;
-}
-
-.pagination {
-  margin: 1.3rem auto;
-  text-align: center;
-}
-
 .link-github {
   text-align: center;
 }
@@ -123,10 +104,6 @@
     transform: translateY(50%);
     right: 0;
     margin-right: 10%;
-  }
-
-  .ais-Hits-list {
-    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -149,10 +126,5 @@
     right: auto;
     margin-right: 1.5rem;
     transform: translate(calc(418px - 100px), 50%);
-  }
-
-  .ais-Hits-list {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1.5rem;
   }
 }

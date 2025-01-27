@@ -1,0 +1,31 @@
+.ais-Hits-list {
+  margin-left: 0;
+  display: grid;
+  grid-gap: 2rem;
+}
+
+.ais-Hits-item {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+.pagination {
+  margin: 1.3rem auto;
+  text-align: center;
+}
+
+@media screen and (min-width: 680px) {
+  .ais-Hits-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .ais-Hits-list {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1.5rem;
+  }
+}
