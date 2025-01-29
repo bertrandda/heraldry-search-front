@@ -9,7 +9,7 @@ import {
   PoweredBy,
   Configure,
 } from 'react-instantsearch';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { PageContext } from '../contexts/PageContext';
 
@@ -68,8 +68,6 @@ const timeout = 500;
 
 const Search = () => {
   const { hidePage } = useContext(PageContext);
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const queryHook = (query, search) => {
     if (timerId) {
@@ -82,10 +80,6 @@ const Search = () => {
   const onFocus = () => {
     delete window.__EMBLEM_DATA__;
     hidePage();
-
-    if (pathname !== '/') {
-      navigate('/');
-    }
   };
 
   return (
@@ -94,6 +88,7 @@ const Search = () => {
       indexName={process.env.REACT_APP_ALGOLIA_INDEX}
     >
       <Helmet>
+        <title>Armorial de France</title>
         <meta property="og:title" content="Armorial de France" />
         <meta name="twitter:title" content="Armorial de France" />
         <meta

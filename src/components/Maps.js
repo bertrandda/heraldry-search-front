@@ -111,8 +111,9 @@ const Maps = () => {
   return (
     <div className="maps-container">
       <Helmet>
-        <meta property="og:title" content="Armorial de France" />
-        <meta name="twitter:title" content="Armorial de France" />
+        <title>Armorial de France - Carte</title>
+        <meta property="og:title" content="Armorial de France - Carte" />
+        <meta name="twitter:title" content="Armorial de France - Carte" />
         <meta
           name="description"
           content="Carte des blasons des villes et villages de France."
@@ -125,10 +126,10 @@ const Maps = () => {
           name="twitter:description"
           content="Carte des blasons des villes et villages de France."
         />
-        <meta property="og:url" content="https://armorialdefrance.org" />
+        <meta property="og:url" content="https://armorialdefrance.org/maps" />
         <meta property="og:image" content="/icon-og.png" />
         <meta name="twitter:image" content="/icon-twitter.png" />
-        <link rel="canonical" href="https://armorialdefrance.org/" />
+        <link rel="canonical" href="https://armorialdefrance.org/maps" />
       </Helmet>
       <div id="map"></div>
       <Outlet />

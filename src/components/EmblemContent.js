@@ -40,6 +40,7 @@ const EmblemContent = ({ emblemData = {} }) => {
     <>
       {emblemData?.path && (
         <Helmet>
+          <title>Armorial de France - {emblemData.name}</title>
           <meta
             property="og:title"
             content={`Armorial de France - ${emblemData.name}`}
