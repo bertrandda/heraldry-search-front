@@ -29,6 +29,10 @@ export default async function handler(req, context) {
     const emblem = await getObject(`${pathname}.json`.replace(/^\//, ''));
     const emblemJson = JSON.parse(emblem.toString());
     htmlData = htmlData.replaceAll(
+      '<title>Armorial de France</title>',
+      `<title>Armorial de France - ${emblemJson.name}</title>`
+    );
+    htmlData = htmlData.replaceAll(
       'content="Armorial de France"',
       `content="Armorial de France - ${emblemJson.name}"`
     );
