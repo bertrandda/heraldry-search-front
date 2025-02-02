@@ -1,6 +1,7 @@
 import { mdiFormatListText, mdiMap } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useEffect, useState } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { Link, Outlet } from 'react-router-dom';
 
 import EmblemModal from './components/EmblemModal';
@@ -52,13 +53,15 @@ const App = ({ page }) => {
         </Link>
       </div>
       <Outlet />
-      <PageContextProvider emblemInfo={window.__EMBLEM_DATA__}>
-        <ModalContextProvider>
-          {page === 'search' && <Search />}
-          {page === 'maps' && <Maps />}
-          <EmblemModal />
-        </ModalContextProvider>
-      </PageContextProvider>
+      <HelmetProvider>
+        <PageContextProvider emblemInfo={window.__EMBLEM_DATA__}>
+          <ModalContextProvider>
+            {page === 'search' && <Search />}
+            {page === 'maps' && <Maps />}
+            <EmblemModal />
+          </ModalContextProvider>
+        </PageContextProvider>
+      </HelmetProvider>
     </div>
   );
 };

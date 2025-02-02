@@ -2,7 +2,7 @@ import { mdiCheckAll, mdiOpenInNew, mdiShareVariant } from '@mdi/js';
 import Icon from '@mdi/react';
 import Tooltip from '@mui/material/Tooltip';
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import {
   generateUrl,

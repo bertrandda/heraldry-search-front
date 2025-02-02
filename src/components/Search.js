@@ -2,7 +2,7 @@ import { mdiGithub } from '@mdi/js';
 import Icon from '@mdi/react';
 import { liteClient } from 'algoliasearch/lite';
 import React, { useContext } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import {
   InstantSearch,
   SearchBox,

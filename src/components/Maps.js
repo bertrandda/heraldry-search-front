@@ -1,6 +1,6 @@
 import L from 'leaflet';
 import React, { useContext, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { Outlet } from 'react-router-dom';
 
 import { ModalContext } from '../contexts/ModalContext';
@@ -127,8 +127,8 @@ const Maps = () => {
           content="Carte des blasons des villes et villages de France."
         />
         <meta property="og:url" content="https://armorialdefrance.org/maps" />
-        <meta property="og:image" content="/icon-og.png" />
-        <meta name="twitter:image" content="/icon-twitter.png" />
+        <meta property="og:image" content="/icon-map-og.png" />
+        <meta name="twitter:image" content="/icon-map-twitter.png" />
         <link rel="canonical" href="https://armorialdefrance.org/maps" />
       </Helmet>
       <div id="map"></div>
