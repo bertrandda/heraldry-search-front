@@ -59,7 +59,7 @@ export default async function handler(req, context) {
       )}"`
     );
     htmlData = htmlData.replaceAll(
-      'content="/icon-twitter.png"',
+      'content="https://armorialdefrance.org/icon-twitter.png"',
       `content="${generateUrlWithPadding(
         generateLargeUrl(emblemJson.imageUrl, 512, false),
         700,

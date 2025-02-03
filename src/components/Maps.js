@@ -128,7 +128,10 @@ const Maps = () => {
         />
         <meta property="og:url" content="https://armorialdefrance.org/maps" />
         <meta property="og:image" content="/icon-map-og.png" />
-        <meta name="twitter:image" content="/icon-map-twitter.png" />
+        <meta
+          name="twitter:image"
+          content={`${window.location.protocol}//${window.location.host}/icon-map-twitter.png`}
+        />
         <link rel="canonical" href="https://armorialdefrance.org/maps" />
       </Helmet>
       <div id="map"></div>
