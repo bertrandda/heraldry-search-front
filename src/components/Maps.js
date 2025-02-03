@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Outlet } from 'react-router-dom';
 
 import { ModalContext } from '../contexts/ModalContext';
+import { PageContext } from '../contexts/PageContext';
 import { searchInBbox } from '../helpers/algolia';
 import { generateUrl } from '../helpers/image';
 
@@ -17,6 +18,7 @@ const Maps = () => {
   const recRef = useRef(null);
   const timeoutRef = useRef(null);
   const { showModal } = useContext(ModalContext);
+  const { hidePage } = useContext(PageContext);
 
   const fetchEmblems = async () => {
     const bounds = mapRef.current.getBounds().pad(-0.1);
@@ -60,6 +62,11 @@ const Maps = () => {
   };
 
   useEffect(() => {
+    if (window.__EMBLEM_DATA__) {
+      delete window.__EMBLEM_DATA__;
+      hidePage();
+    }
+
     if (!mapRef.current) {
       const map = L.map('map', { zoomControl: false }).setView(
         [47.5, 2.3522],

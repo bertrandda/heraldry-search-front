@@ -23,7 +23,9 @@ const PageContent = () => {
 
   return (
     <div className="search-panel">
-      {pageInfo && <EmblemContent emblemData={pageInfo} />}
+      {pageInfo && window.__EMBLEM_DATA__ && (
+        <EmblemContent emblemData={pageInfo} />
+      )}
       {!pageInfo && (
         <div className="search-panel__results">
           <CustomHit />
