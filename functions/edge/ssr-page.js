@@ -25,6 +25,39 @@ export default async function handler(req, context) {
   const response = await context.next();
   let htmlData = await response.text();
 
+  if (pathname === '/maps') {
+    htmlData = htmlData.replaceAll(
+      '<title>Armorial de France</title>',
+      `<title>Armorial de France - Carte</title>`
+    );
+    htmlData = htmlData.replaceAll(
+      'content="Armorial de France"',
+      `content="Armorial de France - Carte"`
+    );
+    htmlData = htmlData.replaceAll(
+      /content="Trouvez[^"]+"/gm,
+      `content="Carte des blasons des villes et villages de France."`
+    );
+    htmlData = htmlData.replaceAll(
+      'content="https://armorialdefrance.org"',
+      `content="https://armorialdefrance.org${pathname}"`
+    );
+    htmlData = htmlData.replaceAll(
+      'href="https://armorialdefrance.org/"',
+      `href="https://armorialdefrance.org${pathname}"`
+    );
+    htmlData = htmlData.replaceAll(
+      'content="/icon-og.png"',
+      `content="/icon-map-og.png"`
+    );
+    htmlData = htmlData.replaceAll(
+      'content="https://armorialdefrance.org/icon-twitter.png"',
+      `content="https://armorialdefrance.org/icon-map-twitter.png"`
+    );
+
+    return new Response(htmlData, response);
+  }
+
   try {
     const emblem = await getObject(`${pathname}.json`.replace(/^\//, ''));
     const emblemJson = JSON.parse(emblem.toString());

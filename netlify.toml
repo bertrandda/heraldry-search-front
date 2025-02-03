@@ -9,6 +9,10 @@
   function = "ssr-page"
 
 [[edge_functions]]
+  path = "/maps"
+  function = "ssr-page"
+
+[[edge_functions]]
   path = "/sitemap.xml"
   function = "sitemap"
 
