@@ -20,7 +20,7 @@ const getObject = async (key) => {
 };
 
 export default async function handler(req, context) {
-  const { pathname } = new URL(req.url);
+  const { origin, pathname } = new URL(req.url);
 
   const response = await context.next();
   let htmlData = await response.text();
@@ -47,12 +47,12 @@ export default async function handler(req, context) {
       `href="https://armorialdefrance.org${pathname}"`
     );
     htmlData = htmlData.replaceAll(
-      'content="/icon-og.png"',
-      `content="/icon-map-og.png"`
+      'content="https://armorialdefrance.org/icon-og.png"',
+      `content="${origin}/icon-map-og.png"`
     );
     htmlData = htmlData.replaceAll(
       'content="https://armorialdefrance.org/icon-twitter.png"',
-      `content="https://armorialdefrance.org/icon-map-twitter.png"`
+      `content="${origin}/icon-map-twitter.png"`
     );
 
     return new Response(htmlData, response);
@@ -84,7 +84,7 @@ export default async function handler(req, context) {
       `href="https://armorialdefrance.org${pathname}"`
     );
     htmlData = htmlData.replaceAll(
-      'content="/icon-og.png"',
+      'content="https://armorialdefrance.org/icon-og.png"',
       `content="${generateUrlWithPadding(
         generateLargeUrl(emblemJson.imageUrl, 512, false),
         1200,

@@ -134,10 +134,13 @@ const Maps = () => {
           content="Carte des blasons des villes et villages de France."
         />
         <meta property="og:url" content="https://armorialdefrance.org/maps" />
-        <meta property="og:image" content="/icon-map-og.png" />
+        <meta
+          property="og:image"
+          content={`${window.location.origin}/icon-map-og.png`}
+        />
         <meta
           name="twitter:image"
-          content={`${window.location.protocol}//${window.location.host}/icon-map-twitter.png`}
+          content={`${window.location.origin}/icon-map-twitter.png`}
         />
         <link rel="canonical" href="https://armorialdefrance.org/maps" />
       </Helmet>

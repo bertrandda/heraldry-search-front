@@ -104,10 +104,13 @@ const Search = () => {
           content="Trouvez le blason que vous voulez grâce à un moteur de recherche puissant contenant les blasons de villes, de villages et de familles de France."
         />
         <meta property="og:url" content="https://armorialdefrance.org" />
-        <meta property="og:image" content="/icon-og.png" />
+        <meta
+          property="og:image"
+          content={`${window.location.origin}/icon-og.png`}
+        />
         <meta
           name="twitter:image"
-          content={`${window.location.protocol}//${window.location.host}/icon-twitter.png`}
+          content={`${window.location.origin}/icon-twitter.png`}
         />
         <link rel="canonical" href="https://armorialdefrance.org/" />
       </Helmet>
