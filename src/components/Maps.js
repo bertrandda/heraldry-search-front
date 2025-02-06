@@ -15,7 +15,6 @@ import './Maps.css';
 const Maps = () => {
   const mapRef = useRef(null);
   const markerGroupRef = useRef(null);
-  const recRef = useRef(null);
   const timeoutRef = useRef(null);
   const { showModal } = useContext(ModalContext);
   const { hidePage } = useContext(PageContext);
@@ -90,14 +89,6 @@ const Maps = () => {
         .addTo(map);
 
       markerGroupRef.current = L.layerGroup().addTo(map);
-      recRef.current = L.rectangle(
-        [
-          [54.559322, -5.767822],
-          [56.1210604, -3.02124],
-        ],
-        { color: '#ff7800', weight: 1 }
-      );
-      recRef.current.addTo(map);
 
       map.on('movestart', () => {
         if (timeoutRef.current) {
