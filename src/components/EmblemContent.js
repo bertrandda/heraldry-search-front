@@ -37,7 +37,7 @@ const EmblemContent = ({ emblemData = {} }) => {
   };
 
   return (
-    <>
+    <div className={window.__EMBLEM_DATA__ ? 'emblem-content' : ''}>
       {emblemData?.path && (
         <Helmet>
           <title>Armorial de France - {emblemData.name}</title>
@@ -160,7 +160,7 @@ const EmblemContent = ({ emblemData = {} }) => {
           />
         </Tooltip>
       )}
-    </>
+    </div>
   );
 };
 

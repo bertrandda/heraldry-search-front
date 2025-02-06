@@ -10,6 +10,18 @@
   color: black;
 }
 
+.emblem-content {
+  max-width: 25rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  position: relative;
+}
+
+.emblem-content .share-link-icon {
+  bottom: 0px;
+}
+
 .emblem-title-modal {
   text-align: center;
 }
@@ -44,4 +56,16 @@
 .link-wikipedia-icon {
   margin-left: 3px;
   margin-right: 3px;
+}
+
+@media screen and (min-width: 680px) {
+  .emblem-content {
+    margin-top: 4rem;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .emblem-content {
+    margin-top: 3rem;
+  }
 }
