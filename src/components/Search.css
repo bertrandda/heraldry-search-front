@@ -1,0 +1,143 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  min-height: 150px;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(rgba(114, 91, 83, 0.4), rgba(50, 25, 17, 0.6)),
+    url(../assets/cover.jpg);
+  background: linear-gradient(rgba(114, 91, 83, 0.4), rgba(50, 25, 17, 0.6)),
+    -webkit-image-set(
+      url(../assets/cover.webp) 1x);
+  background: linear-gradient(rgba(114, 91, 83, 0.4), rgba(50, 25, 17, 0.6)),
+    image-set(
+      url(../assets/cover.avif) type("image/avif"),
+      url(../assets/cover.webp) type("image/webp"),
+      url(../assets/cover.jpg) type("image/jpeg")
+    );
+  background-size: cover;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.header-title-container {
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.header-title {
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.header-subtitle {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.container {
+  padding: 2rem;
+  padding-top: 0;
+}
+
+.search-panel__results {
+  padding-top: 5rem;
+}
+
+.searchbox {
+  border-radius: 8px;
+  height: 64px;
+  width: 100vw;
+  bottom: 0;
+  position: absolute;
+  transform: translateY(50%);
+}
+
+.ais-SearchBox-form {
+  max-width: 90%;
+  height: 100%;
+  margin: auto;
+}
+
+.ais-SearchBox-input {
+  height: 100%;
+  box-shadow: 0 4px 48px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: none;
+  padding: 4px 48px 0 64px;
+  font-family: Hind, Sans serif;
+}
+
+.ais-SearchBox-submit {
+  left: 0;
+  width: 64px;
+  height: 100%;
+  padding: 0 1rem 0 2rem;
+  color: #2281ef;
+  display: flex;
+  align-items: center;
+}
+
+.ais-PoweredBy {
+  position: absolute;
+  transform: translateY(330%);
+  bottom: 0;
+}
+
+.ais-PoweredBy-logo path:nth-of-type(1) {
+  scale: 0.8;
+  transform: translateX(13%) translateY(15%);
+}
+
+.link-github {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.link-github-icon {
+  color: rgb(156, 156, 156);
+}
+
+.link-github-icon:hover {
+  color: black;
+}
+
+@media screen and (min-width: 680px) {
+  .ais-PoweredBy {
+    transform: translateY(50%);
+    right: 0;
+    margin-right: 10%;
+  }
+
+  .search-panel__results {
+    padding-top: 4rem;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .header {
+    padding: 3rem;
+  }
+
+  .searchbox {
+    position: relative;
+    transform: translateY(0%);
+  }
+
+  .ais-SearchBox-form {
+    width: 837px;
+  }
+
+  .ais-PoweredBy {
+    bottom: calc(3rem + 32px);
+    right: auto;
+    margin-right: 1.5rem;
+    transform: translate(calc(418px - 100px), 50%);
+  }
+
+  .search-panel__results {
+    padding-top: 3rem;
+  }
+}

@@ -1,14 +1,14 @@
 import mediumZoom from 'medium-zoom';
 import PropTypes from 'prop-types';
 import React, { useRef, useEffect } from 'react';
-import { connectHits } from 'react-instantsearch-dom';
+import { useHits } from 'react-instantsearch';
 
 import EmblemItem from './EmblemItem';
 import './CustomHits.css';
 
 const zoom = mediumZoom();
 
-const Hits = ({ hits }) => {
+const Hits = ({ hits = [] }) => {
   const zoomRef = useRef(zoom);
   zoomRef.current.detach();
 
@@ -81,8 +81,12 @@ Hits.propTypes = {
   hits: PropTypes.array,
 };
 
-Hits.defaultProps = {
-  hits: {},
-};
-
 export default CustomHits;
+
+function connectHits(Component) {
+  return function (props) {
+    const data = useHits(props);
+
+    return <Component {...props} {...data} />;
+  };
+}

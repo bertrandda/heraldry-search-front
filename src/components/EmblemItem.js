@@ -1,15 +1,21 @@
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ModalContext } from '../contexts/ModalContext';
 import { generateUrl } from '../helpers/image';
 import './EmblemItem.css';
 
-const EmblemItem = ({ hit, zoom }) => {
+const EmblemItem = ({ hit = {}, zoom = {} }) => {
   const zoomRef = useRef(zoom);
+  const { showModal } = useContext(ModalContext);
 
   const attachZoom = (image) => {
     zoomRef.current.attach(image);
+  };
+
+  const clickItem = (emblem) => {
+    showModal(emblem);
   };
 
   return (
@@ -27,8 +33,7 @@ const EmblemItem = ({ hit, zoom }) => {
         className="emblem-info-container"
         role="button"
         tabIndex={0}
-        to={hit.path}
-        state={{ emblem: hit }}
+        onClick={() => clickItem(hit)}
       >
         <h1 className="emblem-title">{hit.name}</h1>
         <p className="emblem-description">{hit.descriptionText}</p>
@@ -40,11 +45,6 @@ const EmblemItem = ({ hit, zoom }) => {
 EmblemItem.propTypes = {
   hit: PropTypes.object,
   zoom: PropTypes.object,
-};
-
-EmblemItem.defaultProps = {
-  hit: {},
-  zoom: {},
 };
 
 export default EmblemItem;

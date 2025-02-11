@@ -1,5 +1,5 @@
 import consumers from 'node:stream/consumers';
-import { generateLargeUrl, generateUrlWithPadding } from '../src/helpers/image.js'
+import { generateLargeUrl, generateUrlWithPadding } from '../../src/helpers/image.js'
 
 import { S3Client } from 'https://deno.land/x/s3_lite_client@0.6.1/mod.ts';
 
@@ -20,14 +20,51 @@ const getObject = async (key) => {
 };
 
 export default async function handler(req, context) {
-  const { pathname } = new URL(req.url);
+  const { origin, pathname } = new URL(req.url);
 
   const response = await context.next();
   let htmlData = await response.text();
 
+  if (pathname === '/maps') {
+    htmlData = htmlData.replaceAll(
+      '<title>Armorial de France</title>',
+      `<title>Armorial de France - Carte</title>`
+    );
+    htmlData = htmlData.replaceAll(
+      'content="Armorial de France"',
+      `content="Armorial de France - Carte"`
+    );
+    htmlData = htmlData.replaceAll(
+      /content="Trouvez[^"]+"/gm,
+      `content="Carte des blasons des villes et villages de France."`
+    );
+    htmlData = htmlData.replaceAll(
+      'content="https://armorialdefrance.org"',
+      `content="https://armorialdefrance.org${pathname}"`
+    );
+    htmlData = htmlData.replaceAll(
+      'href="https://armorialdefrance.org/"',
+      `href="https://armorialdefrance.org${pathname}"`
+    );
+    htmlData = htmlData.replaceAll(
+      'content="https://armorialdefrance.org/icon-og.png"',
+      `content="${origin}/icon-map-og.png"`
+    );
+    htmlData = htmlData.replaceAll(
+      'content="https://armorialdefrance.org/icon-twitter.png"',
+      `content="${origin}/icon-map-twitter.png"`
+    );
+
+    return new Response(htmlData, response);
+  }
+
   try {
     const emblem = await getObject(`${pathname}.json`.replace(/^\//, ''));
     const emblemJson = JSON.parse(emblem.toString());
+    htmlData = htmlData.replaceAll(
+      '<title>Armorial de France</title>',
+      `<title>Armorial de France - ${emblemJson.name}</title>`
+    );
     htmlData = htmlData.replaceAll(
       'content="Armorial de France"',
       `content="Armorial de France - ${emblemJson.name}"`
@@ -47,7 +84,7 @@ export default async function handler(req, context) {
       `href="https://armorialdefrance.org${pathname}"`
     );
     htmlData = htmlData.replaceAll(
-      'content="/icon-og.png"',
+      'content="https://armorialdefrance.org/icon-og.png"',
       `content="${generateUrlWithPadding(
         generateLargeUrl(emblemJson.imageUrl, 512, false),
         1200,
@@ -55,7 +92,7 @@ export default async function handler(req, context) {
       )}"`
     );
     htmlData = htmlData.replaceAll(
-      'content="/icon-twitter.png"',
+      'content="https://armorialdefrance.org/icon-twitter.png"',
       `content="${generateUrlWithPadding(
         generateLargeUrl(emblemJson.imageUrl, 512, false),
         700,
