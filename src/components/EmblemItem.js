@@ -35,7 +35,7 @@ const EmblemItem = ({ hit = {}, zoom = {} }) => {
         tabIndex={0}
         onClick={() => clickItem(hit)}
       >
-        <h1 className="emblem-title">{hit.name}</h1>
+        <h2 className="emblem-title">{hit.name}</h2>
         <p className="emblem-description">{hit.descriptionText}</p>
       </Link>
     </article>

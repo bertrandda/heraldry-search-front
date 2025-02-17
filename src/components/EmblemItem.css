@@ -52,6 +52,7 @@
 .emblem-title {
   flex: 0 0 100%;
   font-size: 0.9rem;
+  margin: 0;
 }
 
 .emblem-description {
