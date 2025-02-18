@@ -24,9 +24,7 @@ export const generateUrlWithPadding = (sourceUrl, width, height) => {
     url = url.replace('https://upload.wikimedia.org/wikipedia/', '');
 
     if (width || height) {
-      url = `${url}?w=${width || height}&h=${
-        height || width
-      }&func=fit&bg_color=fff`;
+      url = `${url}?w=${width || height}&h=${height || width}&func=fit`;
     }
   }
 
