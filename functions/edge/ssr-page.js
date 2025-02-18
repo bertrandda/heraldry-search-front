@@ -36,7 +36,7 @@ export default async function handler(req, context) {
     );
     htmlData = htmlData.replaceAll(
       /content="Trouvez[^"]+"/gm,
-      `content="Carte des blasons des villes et villages de France."`
+      `content="Explorez une carte interactive affichant les blasons des communes de France. Plongez dans l’histoire et l’héritage héraldique de chaque ville et village."`
     );
     htmlData = htmlData.replaceAll(
       'content="https://armorialdefrance.org"',

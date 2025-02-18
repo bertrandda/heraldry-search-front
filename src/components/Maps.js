@@ -114,15 +114,15 @@ const Maps = () => {
         <meta name="twitter:title" content="Armorial de France - Carte" />
         <meta
           name="description"
-          content="Carte des blasons des villes et villages de France."
+          content="Explorez une carte interactive affichant les blasons des communes de France. Plongez dans l’histoire et l’héritage héraldique de chaque ville et village."
         />
         <meta
           property="og:description"
-          content="Carte des blasons des villes et villages de France."
+          content="Explorez une carte interactive affichant les blasons des communes de France. Plongez dans l’histoire et l’héritage héraldique de chaque ville et village."
         />
         <meta
           name="twitter:description"
-          content="Carte des blasons des villes et villages de France."
+          content="Explorez une carte interactive affichant les blasons des communes de France. Plongez dans l’histoire et l’héritage héraldique de chaque ville et village."
         />
         <meta property="og:url" content="https://armorialdefrance.org/maps" />
         <meta

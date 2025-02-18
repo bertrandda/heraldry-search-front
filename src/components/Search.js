@@ -157,6 +157,7 @@ const Search = () => {
             href="https://github.com/bertrandda/heraldry-search-front"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Projet GitHub"
           >
             <Icon className="link-github-icon" path={mdiGithub} size={0.8} />
           </a>
