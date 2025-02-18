@@ -26,6 +26,7 @@ const App = ({ page }) => {
           role="button"
           tabIndex={0}
           to="/"
+          aria-label="Page recherche"
           onClick={() => setListView(true)}
         >
           <Icon
@@ -41,6 +42,7 @@ const App = ({ page }) => {
           role="button"
           tabIndex={0}
           to="/maps"
+          aria-label="Page carte"
           onClick={() => setListView(false)}
         >
           <Icon
