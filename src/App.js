@@ -2,7 +2,7 @@ import { mdiFormatListText, mdiMap } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useEffect, useState } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router';
 
 import EmblemModal from './components/EmblemModal';
 import Maps from './components/Maps';

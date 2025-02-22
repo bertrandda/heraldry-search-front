@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { ModalContext } from '../contexts/ModalContext';
 import { generateUrl } from '../helpers/image';

@@ -1,8 +1,14 @@
-import { mdiCheckAll, mdiOpenInNew, mdiShareVariant } from '@mdi/js';
+import {
+  mdiCheckAll,
+  mdiMapSearch,
+  mdiOpenInNew,
+  mdiShareVariant,
+} from '@mdi/js';
 import Icon from '@mdi/react';
 import Tooltip from '@mui/material/Tooltip';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router';
 
 import {
   generateUrl,
@@ -13,6 +19,7 @@ import './EmblemContent.css';
 
 const EmblemContent = ({ emblemData = {} }) => {
   const HOST = window.location.origin;
+  const PATH = window.location.pathname;
 
   const [shareIcon, setShareIcon] = useState(mdiShareVariant);
   const [shareIconTimeout, setShareIconTimeout] = useState(null);
@@ -143,23 +150,47 @@ const EmblemContent = ({ emblemData = {} }) => {
           </a>
         </div>
       )}
-      {HOST && (
-        <Tooltip
-          title={shareIconText}
-          placement="top"
-          arrow={true}
-          enterTouchDelay={0}
-          leaveTouchDelay={800}
-        >
-          <Icon
-            className="share-link-icon"
-            path={shareIcon}
-            size={0.9}
-            aria-disabled={true}
-            onClick={copyShareLink}
-          />
-        </Tooltip>
-      )}
+      <div className="action-icons">
+        {emblemData?.geohash && PATH !== '/maps' && (
+          <Tooltip
+            title="Afficher sur la carte"
+            placement="top"
+            arrow={true}
+            enterTouchDelay={0}
+            leaveTouchDelay={800}
+          >
+            <Link
+              to={`/maps?lat=${Number((emblemData?._geoloc?.lat || emblemData.lat).toFixed(3))}&lng=${Number((emblemData?._geoloc?.lng || emblemData.lon).toFixed(3))}&z=13`}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+            >
+              <Icon
+                className="open-map-icon"
+                path={mdiMapSearch}
+                size={0.9}
+                aria-disabled={true}
+              />
+            </Link>
+          </Tooltip>
+        )}
+        {HOST && (
+          <Tooltip
+            title={shareIconText}
+            placement="top"
+            arrow={true}
+            enterTouchDelay={0}
+            leaveTouchDelay={800}
+          >
+            <Icon
+              className="share-link-icon"
+              path={shareIcon}
+              size={0.9}
+              aria-disabled={true}
+              onClick={copyShareLink}
+            />
+          </Tooltip>
+        )}
+      </div>
     </div>
   );
 };

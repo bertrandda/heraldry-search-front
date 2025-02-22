@@ -2,7 +2,7 @@ import { mdiClose } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactModal from 'react-modal';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 
 import { ModalContext } from '../contexts/ModalContext';
 
