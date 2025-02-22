@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Pagination } from 'react-instantsearch';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { PageContext } from '../contexts/PageContext';
 

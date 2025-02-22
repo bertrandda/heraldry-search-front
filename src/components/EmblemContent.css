@@ -1,25 +1,9 @@
-.share-link-icon {
-  position: absolute;
-  right: 15px;
-  bottom: 10px;
-  color: rgb(156, 156, 156);
-}
-
-.share-link-icon:hover {
-  cursor: pointer;
-  color: black;
-}
-
 .emblem-content {
   max-width: 25rem;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5rem;
   position: relative;
-}
-
-.emblem-content .share-link-icon {
-  bottom: 0px;
 }
 
 .emblem-title-modal {
@@ -45,6 +29,7 @@
   text-align: center;
   font-size: 0.8em;
   margin: 5px;
+  flex: auto;
 }
 
 .link-wikipedia-modal a {
@@ -56,6 +41,28 @@
 .link-wikipedia-icon {
   margin-left: 3px;
   margin-right: 3px;
+}
+
+.action-icons {
+  right: 15px;
+  bottom: 10px;
+  color: rgb(156, 156, 156);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.open-map-icon {
+  margin-right: 5px;
+  color: rgb(156, 156, 156);
+}
+
+.emblem-content .share-link-icon {
+  bottom: 0px;
+}
+
+.open-map-icon:hover, .share-link-icon:hover {
+  cursor: pointer;
+  color: black;
 }
 
 @media screen and (min-width: 680px) {

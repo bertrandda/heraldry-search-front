@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import React, { useContext, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router';
 
 import { ModalContext } from '../contexts/ModalContext';
 import { PageContext } from '../contexts/PageContext';
@@ -18,6 +18,7 @@ const Maps = () => {
   const timeoutRef = useRef(null);
   const { showModal } = useContext(ModalContext);
   const { hidePage } = useContext(PageContext);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const fetchEmblems = async () => {
     const bounds = mapRef.current.getBounds().pad(-0.1);
@@ -68,8 +69,8 @@ const Maps = () => {
 
     if (!mapRef.current) {
       const map = L.map('map', { zoomControl: false }).setView(
-        [47.5, 2.3522],
-        6
+        [searchParams.get('lat') || 47.5, searchParams.get('lng') || 2.3522],
+        searchParams.get('z') || 6
       );
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -97,7 +98,15 @@ const Maps = () => {
       });
       map.on(
         'moveend',
-        () => (timeoutRef.current = setTimeout(fetchEmblems, 500))
+        () =>
+          (timeoutRef.current = setTimeout(() => {
+            setSearchParams({
+              lat: mapRef.current.getCenter().lat.toFixed(3),
+              lng: mapRef.current.getCenter().lng.toFixed(3),
+              z: mapRef.current.getZoom(),
+            });
+            fetchEmblems();
+          }, 500))
       );
 
       mapRef.current = map;

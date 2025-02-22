@@ -9,7 +9,7 @@ import {
   PoweredBy,
   Configure,
 } from 'react-instantsearch';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router';
 
 import { PageContext } from '../contexts/PageContext';
 
