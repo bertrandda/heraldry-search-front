@@ -127,10 +127,15 @@ const EmblemContent = ({ emblemData = {} }) => {
         dangerouslySetInnerHTML={{
           __html:
             emblemData.description &&
-            emblemData.description.replace(
-              /href="\//gim,
-              'target="_blank" rel="noopener noreferrer" href="https://fr.wikipedia.org/'
-            ),
+            emblemData.description
+              .replace(
+                /href="\//gim,
+                'target="_blank" rel="noopener noreferrer" href="https://fr.wikipedia.org/'
+              )
+              .replace(
+                /href=".\//gim,
+                'target="_blank" rel="noopener noreferrer" href="https://fr.wikipedia.org/wiki/'
+              ),
         }}
       />
       {emblemData.sourceUrl && (
