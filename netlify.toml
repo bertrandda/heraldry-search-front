@@ -7,14 +7,17 @@
 [[edge_functions]]
   path = "/(famille|ville)/*"
   function = "ssr-page"
+  cache = "manual"
 
 [[edge_functions]]
   path = "/maps"
   function = "ssr-page"
+  cache = "manual"
 
 [[edge_functions]]
   path = "/sitemap.xml"
   function = "sitemap"
+  cache = "manual"
 
 [[redirects]]
   from = "https://armorial.bertranddaure.fr/*"

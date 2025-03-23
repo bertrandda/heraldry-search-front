@@ -68,7 +68,13 @@ const Maps = () => {
     }
 
     if (!mapRef.current) {
-      const map = L.map('map', { zoomControl: false }).setView(
+      const map = L.map('map', {
+        zoomControl: false,
+        maxBounds: [
+          [41, -5.3],
+          [51.3, 9.8],
+        ],
+      }).setView(
         [searchParams.get('lat') || 47.5, searchParams.get('lng') || 2.3522],
         searchParams.get('z') || 6
       );

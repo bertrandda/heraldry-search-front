@@ -55,6 +55,7 @@ export default async function handler(req, context) {
       `content="${origin}/icon-map-twitter.png"`
     );
 
+    response.headers.append('cache-control', 'public, max-age=604800, s-maxage=2678400') // 7d local, 31d CDN
     return new Response(htmlData, response);
   }
 
@@ -111,5 +112,6 @@ export default async function handler(req, context) {
     return Response.redirect(url);
   }
 
+  response.headers.append('cache-control', 'public, max-age=604800, s-maxage=2678400') // 7d local, 31d CDN
   return new Response(htmlData, response);
 }
