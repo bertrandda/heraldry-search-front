@@ -22,6 +22,9 @@ export default async function handler() {
   const emblem = await getObject('sitemap.xml');
 
   return new Response(emblem, {
-    headers: { 'content-type': 'text/xml' }
+    headers: {
+      'cache-control': 'public, max-age=604800',
+      'content-type': 'text/xml'
+    }
   })
 }
