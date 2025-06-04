@@ -1,25 +1,25 @@
-import React, { useContext, useEffect } from 'react';
-import { Pagination } from 'react-instantsearch';
-import { useNavigate } from 'react-router';
+import React, { useContext, useEffect } from 'react'
+import { Pagination } from 'react-instantsearch'
+import { useNavigate } from 'react-router'
 
-import { PageContext } from '../contexts/PageContext';
+import { PageContext } from '../contexts/PageContext'
 
-import CustomHit from './CustomHits';
-import EmblemContent from './EmblemContent';
+import CustomHit from './CustomHits'
+import EmblemContent from './EmblemContent'
 
-import '@fontsource/hind';
-import './PageContent.css';
+import '@fontsource/hind'
+import './PageContent.css'
 
 const PageContent = () => {
-  const { pageInfo } = useContext(PageContext);
-  const navigate = useNavigate();
+  const { pageInfo } = useContext(PageContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!pageInfo) {
-      navigate('/');
+      navigate('/')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageInfo]);
+  }, [pageInfo])
 
   return (
     <div className="search-panel">
@@ -35,7 +35,7 @@ const PageContent = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default PageContent;
+export default PageContent

@@ -1,10 +1,10 @@
-import { liteClient } from 'algoliasearch/lite';
+import { liteClient } from 'algoliasearch/lite'
 
 export const searchInBbox = (bbox) => {
   const searchClient = liteClient(
     process.env.REACT_APP_ALGOLIA_APP_ID,
-    process.env.REACT_APP_ALGOLIA_API_KEY
-  );
+    process.env.REACT_APP_ALGOLIA_API_KEY,
+  )
 
   return searchClient.search({
     requests: [
@@ -14,5 +14,5 @@ export const searchInBbox = (bbox) => {
         hitsPerPage: 15,
       },
     ],
-  });
-};
+  })
+}
