@@ -1,6 +1,6 @@
 import { mdiClose } from '@mdi/js'
 import Icon from '@mdi/react'
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ReactModal from 'react-modal'
 import { useLocation, useNavigate } from 'react-router'
 
@@ -24,8 +24,7 @@ const EmblemModal = () => {
     if (modalInfo?.path && pathname !== '/maps') {
       navigate(modalInfo.path)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [modalInfo])
+  }, [modalInfo]) // eslint-disable-line
 
   useEffect(() => {
     if (modalInfo) {

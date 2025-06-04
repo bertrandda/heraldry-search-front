@@ -1,5 +1,5 @@
 import L from 'leaflet'
-import React, { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Outlet, useSearchParams } from 'react-router'
 
@@ -118,8 +118,7 @@ const Maps = () => {
       mapRef.current = map
       fetchEmblems()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []) // eslint-disable-line
 
   return (
     <div className="maps-container">

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useContext, useRef } from 'react'
+import { useContext, useRef } from 'react'
 import { Link } from 'react-router'
 
 import { ModalContext } from '../contexts/ModalContext'

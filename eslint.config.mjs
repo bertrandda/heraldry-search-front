@@ -1,4 +1,5 @@
 import { defineConfig, globalIgnores } from 'eslint/config'
+import js from '@eslint/js'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import stylistic from '@stylistic/eslint-plugin'
@@ -8,6 +9,7 @@ export default defineConfig([
   globalIgnores(['build/**/*', 'node_modules/**/*', 'functions/edge/**/*', '.netlify/**/*']),
   {
     extends: [
+      js.configs.recommended,
       stylistic.configs.recommended,
       react.configs.flat.recommended,
       react.configs.flat['jsx-runtime'],
@@ -15,12 +17,14 @@ export default defineConfig([
     ],
 
     plugins: {
+      js,
       react,
     },
 
     languageOptions: {
       globals: {
         ...globals.browser,
+        ...globals.node,
       },
 
       ecmaVersion: 'latest',

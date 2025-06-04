@@ -1,6 +1,6 @@
 import mediumZoom from 'medium-zoom'
 import PropTypes from 'prop-types'
-import React, { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { useHits } from 'react-instantsearch'
 
 import EmblemItem from './EmblemItem'

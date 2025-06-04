@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { Pagination } from 'react-instantsearch'
 import { useNavigate } from 'react-router'
 
@@ -18,8 +18,7 @@ const PageContent = () => {
     if (!pageInfo) {
       navigate('/')
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageInfo])
+  }, [pageInfo]) // eslint-disable-line
 
   return (
     <div className="search-panel">

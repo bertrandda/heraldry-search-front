@@ -1,6 +1,6 @@
 import { mdiFormatListText, mdiMap } from '@mdi/js'
 import Icon from '@mdi/react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { Link, Outlet } from 'react-router'
 

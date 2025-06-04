@@ -6,7 +6,7 @@ import {
 } from '@mdi/js'
 import Icon from '@mdi/react'
 import { Tooltip } from '@mui/material'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router'
 

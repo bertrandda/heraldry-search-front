@@ -14,7 +14,8 @@ export const generateUrlWithPadding = (sourceUrl, width, height) => {
   try {
     cdnUrl = process.env.REACT_APP_IMAGE_CDN_URL || ''
   }
-  catch (error) {
+  catch {
+    // eslint-disable-next-line no-undef
     cdnUrl = Deno.env.get('REACT_APP_IMAGE_CDN_URL') || ''
   }
 
