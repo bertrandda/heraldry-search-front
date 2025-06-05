@@ -1,22 +1,22 @@
-import { mdiFormatListText, mdiMap } from '@mdi/js';
-import Icon from '@mdi/react';
-import React, { useEffect, useState } from 'react';
-import { HelmetProvider } from 'react-helmet-async';
-import { Link, Outlet } from 'react-router';
+import { mdiFormatListText, mdiMap } from '@mdi/js'
+import Icon from '@mdi/react'
+import { useEffect, useState } from 'react'
+import { HelmetProvider } from 'react-helmet-async'
+import { Link, Outlet } from 'react-router'
 
-import EmblemModal from './components/EmblemModal';
-import Maps from './components/Maps';
-import Search from './components/Search';
-import { ModalContextProvider } from './contexts/ModalContext';
-import { PageContextProvider } from './contexts/PageContext';
+import EmblemModal from './components/EmblemModal'
+import Maps from './components/Maps'
+import Search from './components/Search'
+import { ModalContextProvider } from './contexts/ModalContext'
+import { PageContextProvider } from './contexts/PageContext'
 
-import '@fontsource/hind';
-import './App.css';
+import '@fontsource/hind'
+import './App.css'
 
 const App = ({ page }) => {
-  const [listView, setListView] = useState(page === 'search');
+  const [listView, setListView] = useState(page === 'search')
 
-  useEffect(() => {}, [listView]);
+  useEffect(() => {}, [listView])
 
   return (
     <div className="app-container">
@@ -65,7 +65,7 @@ const App = ({ page }) => {
         </PageContextProvider>
       </HelmetProvider>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

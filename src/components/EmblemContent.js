@@ -3,51 +3,54 @@ import {
   mdiMapSearch,
   mdiOpenInNew,
   mdiShareVariant,
-} from '@mdi/js';
-import Icon from '@mdi/react';
-import Tooltip from '@mui/material/Tooltip';
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router';
+} from '@mdi/js'
+import Icon from '@mdi/react'
+import { Tooltip } from '@mui/material'
+import { useState } from 'react'
+import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router'
 
 import {
   generateUrl,
   generateLargeUrl,
   generateUrlWithPadding,
-} from '../helpers/image';
-import './EmblemContent.css';
+} from '../helpers/image'
+import './EmblemContent.css'
 
 const EmblemContent = ({ emblemData = {} }) => {
-  const HOST = window.location.origin;
-  const PATH = window.location.pathname;
+  const HOST = window.location.origin
+  const PATH = window.location.pathname
 
-  const [shareIcon, setShareIcon] = useState(mdiShareVariant);
-  const [shareIconTimeout, setShareIconTimeout] = useState(null);
-  const [shareIconText, setShareIconText] = useState('Lien de partage');
+  const [shareIcon, setShareIcon] = useState(mdiShareVariant)
+  const [shareIconTimeout, setShareIconTimeout] = useState(null)
+  const [shareIconText, setShareIconText] = useState('Lien de partage')
 
   const copyShareLink = () => {
-    navigator.clipboard.writeText(`${HOST}${emblemData.path}`);
-    setShareIcon(mdiCheckAll);
-    setShareIconText('Copié');
+    navigator.clipboard.writeText(`${HOST}${emblemData.path}`)
+    setShareIcon(mdiCheckAll)
+    setShareIconText('Copié')
 
     if (shareIconTimeout) {
-      clearTimeout(shareIconTimeout);
+      clearTimeout(shareIconTimeout)
     }
 
     setShareIconTimeout(
       setTimeout(() => {
-        setShareIcon(mdiShareVariant);
-        setShareIconText('Lien de partage');
-        setShareIconTimeout(null);
-      }, 1500)
-    );
-  };
+        setShareIcon(mdiShareVariant)
+        setShareIconText('Lien de partage')
+        setShareIconTimeout(null)
+      }, 1500),
+    )
+  }
 
   return (
     <div className={window.__EMBLEM_DATA__ ? 'emblem-content' : ''}>
       {emblemData?.path && (
         <Helmet>
-          <title>Armorial de France - {emblemData.name}</title>
+          <title>
+            Armorial de France -
+            {emblemData.name}
+          </title>
           <meta
             property="og:title"
             content={`Armorial de France - ${emblemData.name}`}
@@ -74,7 +77,7 @@ const EmblemContent = ({ emblemData = {} }) => {
             content={`${generateUrlWithPadding(
               generateLargeUrl(emblemData.imageUrl, 512, false),
               1200,
-              627
+              627,
             )}`}
           />
           <meta
@@ -82,7 +85,7 @@ const EmblemContent = ({ emblemData = {} }) => {
             content={`${generateUrlWithPadding(
               generateLargeUrl(emblemData.imageUrl, 512, false),
               700,
-              700
+              700,
             )}`}
           />
           <link
@@ -95,29 +98,30 @@ const EmblemContent = ({ emblemData = {} }) => {
       <img
         className="emblem-image-modal"
         src={
-          emblemData.imageUrl &&
-          generateUrl(
+          emblemData.imageUrl
+          && generateUrl(
             emblemData.imageUrl.replace(
               /g\/\d*px/g,
               `g/${
                 window.innerWidth < window.innerHeight
                   ? window.innerWidth
                   : window.innerHeight
-              }px`
-            )
+              }px`,
+            ),
           )
         }
         alt={`Armoiries ${emblemData.name}`}
       />
       {emblemData.credits && (
         <div className="credit-wikipedia-modal">
-          Crédits :{' '}
+          Crédits :
+          {' '}
           <span
             className="credit-value-wikipedia-modal"
             dangerouslySetInnerHTML={{
               __html: emblemData.credits.replaceAll(
                 '<a ',
-                '<a target="_blank" '
+                '<a target="_blank" ',
               ),
             }}
           />
@@ -126,15 +130,15 @@ const EmblemContent = ({ emblemData = {} }) => {
       <div
         dangerouslySetInnerHTML={{
           __html:
-            emblemData.description &&
             emblemData.description
+            && emblemData.description
               .replace(
                 /href="\//gim,
-                'target="_blank" rel="noopener noreferrer" href="https://fr.wikipedia.org/'
+                'target="_blank" rel="noopener noreferrer" href="https://fr.wikipedia.org/',
               )
               .replace(
                 /href=".\//gim,
-                'target="_blank" rel="noopener noreferrer" href="https://fr.wikipedia.org/wiki/'
+                'target="_blank" rel="noopener noreferrer" href="https://fr.wikipedia.org/wiki/',
               ),
         }}
       />
@@ -197,7 +201,7 @@ const EmblemContent = ({ emblemData = {} }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EmblemContent;
+export default EmblemContent

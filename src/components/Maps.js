@@ -1,27 +1,27 @@
-import L from 'leaflet';
-import React, { useContext, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Outlet, useSearchParams } from 'react-router';
+import L from 'leaflet'
+import { useContext, useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
+import { Outlet, useSearchParams } from 'react-router'
 
-import { ModalContext } from '../contexts/ModalContext';
-import { PageContext } from '../contexts/PageContext';
-import { searchInBbox } from '../helpers/algolia';
-import { generateUrl } from '../helpers/image';
+import { ModalContext } from '../contexts/ModalContext'
+import { PageContext } from '../contexts/PageContext'
+import { searchInBbox } from '../helpers/algolia'
+import { generateUrl } from '../helpers/image'
 
-import '@fontsource/hind';
-import 'leaflet/dist/leaflet.css';
-import './Maps.css';
+import '@fontsource/hind'
+import 'leaflet/dist/leaflet.css'
+import './Maps.css'
 
 const Maps = () => {
-  const mapRef = useRef(null);
-  const markerGroupRef = useRef(null);
-  const timeoutRef = useRef(null);
-  const { showModal } = useContext(ModalContext);
-  const { hidePage } = useContext(PageContext);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const mapRef = useRef(null)
+  const markerGroupRef = useRef(null)
+  const timeoutRef = useRef(null)
+  const { showModal } = useContext(ModalContext)
+  const { hidePage } = useContext(PageContext)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const fetchEmblems = async () => {
-    const bounds = mapRef.current.getBounds().pad(-0.1);
+    const bounds = mapRef.current.getBounds().pad(-0.1)
 
     const boundCrop = [
       [
@@ -32,18 +32,18 @@ const Maps = () => {
         Number(bounds.getSouth().toFixed(3)),
         Number(bounds.getWest().toFixed(3)),
       ],
-    ];
+    ]
 
     const {
       results: [{ hits }],
-    } = await searchInBbox(boundCrop);
+    } = await searchInBbox(boundCrop)
 
-    const x = 60;
+    const x = 60
 
     const newMarkerGroup = L.layerGroup(
       hits.map((hit) => {
-        const y =
-          hit.size?.[1] && hit.size?.[0] ? (hit.size[1] / hit.size[0]) * x : 66;
+        const y
+          = hit.size?.[1] && hit.size?.[0] ? (hit.size[1] / hit.size[0]) * x : 66
 
         const marker = L.marker([hit._geoloc.lat, hit._geoloc.lng], {
           icon: L.icon({
@@ -52,19 +52,19 @@ const Maps = () => {
             iconAnchor: [x / 2, y / 2],
           }),
           alt: hit.name,
-        }).on('click', () => showModal(hit));
+        }).on('click', () => showModal(hit))
 
-        return marker;
-      })
-    ).addTo(mapRef.current);
-    markerGroupRef.current.remove();
-    markerGroupRef.current = newMarkerGroup;
-  };
+        return marker
+      }),
+    ).addTo(mapRef.current)
+    markerGroupRef.current.remove()
+    markerGroupRef.current = newMarkerGroup
+  }
 
   useEffect(() => {
     if (window.__EMBLEM_DATA__) {
-      delete window.__EMBLEM_DATA__;
-      hidePage();
+      delete window.__EMBLEM_DATA__
+      hidePage()
     }
 
     if (!mapRef.current) {
@@ -76,32 +76,32 @@ const Maps = () => {
         ],
       }).setView(
         [searchParams.get('lat') || 47.5, searchParams.get('lng') || 2.3522],
-        searchParams.get('z') || 6
-      );
+        searchParams.get('z') || 6,
+      )
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attributionControl: false,
-      }).addTo(map);
-      map.attributionControl.remove();
+      }).addTo(map)
+      map.attributionControl.remove()
       L.control
         .attribution({ prefix: false })
         .addAttribution(
-          '&copy; <a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          '&copy; <a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         )
-        .addTo(map);
+        .addTo(map)
       L.control
         .zoom({
           position: 'bottomright',
         })
-        .addTo(map);
+        .addTo(map)
 
-      markerGroupRef.current = L.layerGroup().addTo(map);
+      markerGroupRef.current = L.layerGroup().addTo(map)
 
       map.on('movestart', () => {
         if (timeoutRef.current) {
-          clearTimeout(timeoutRef.current);
+          clearTimeout(timeoutRef.current)
         }
-      });
+      })
       map.on(
         'moveend',
         () =>
@@ -110,16 +110,15 @@ const Maps = () => {
               lat: mapRef.current.getCenter().lat.toFixed(3),
               lng: mapRef.current.getCenter().lng.toFixed(3),
               z: mapRef.current.getZoom(),
-            });
-            fetchEmblems();
-          }, 500))
-      );
+            })
+            fetchEmblems()
+          }, 500)),
+      )
 
-      mapRef.current = map;
-      fetchEmblems();
+      mapRef.current = map
+      fetchEmblems()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []) // eslint-disable-line
 
   return (
     <div className="maps-container">
@@ -153,7 +152,7 @@ const Maps = () => {
       <div id="map"></div>
       <Outlet />
     </div>
-  );
-};
+  )
+}
 
-export default Maps;
+export default Maps

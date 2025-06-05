@@ -1,35 +1,36 @@
-/* eslint-disable no-undef */
 export const generateLargeUrl = (sourceUrl, width, allowSvg = true) => {
   if (!allowSvg && !sourceUrl.match(/\/wikipedia\/commons\/thumb\//g)) {
     return sourceUrl
       .replace('/wikipedia/commons/', '/wikipedia/commons/thumb/')
-      .concat(`/${width}px-`, sourceUrl.split('/').pop(), '.png');
+      .concat(`/${width}px-`, sourceUrl.split('/').pop(), '.png')
   }
 
-  return sourceUrl.replace(/g\/\d*px/g, `g/${width}px`);
-};
+  return sourceUrl.replace(/g\/\d*px/g, `g/${width}px`)
+}
 
 export const generateUrlWithPadding = (sourceUrl, width, height) => {
-  let cdnUrl;
-  let url;
+  let cdnUrl
+  let url
   try {
-    cdnUrl = process.env.REACT_APP_IMAGE_CDN_URL || '';
-  } catch (error) {
-    cdnUrl = Deno.env.get('REACT_APP_IMAGE_CDN_URL') || '';
+    cdnUrl = process.env.REACT_APP_IMAGE_CDN_URL || ''
+  }
+  catch {
+    // eslint-disable-next-line no-undef
+    cdnUrl = Deno.env.get('REACT_APP_IMAGE_CDN_URL') || ''
   }
 
-  url = `${cdnUrl}${sourceUrl}`;
+  url = `${cdnUrl}${sourceUrl}`
 
   if (cdnUrl !== '') {
-    url = url.replace('https://upload.wikimedia.org/wikipedia/', '');
+    url = url.replace('https://upload.wikimedia.org/wikipedia/', '')
 
     if (width || height) {
-      url = `${url}?w=${width || height}&h=${height || width}&func=fit`;
+      url = `${url}?w=${width || height}&h=${height || width}&func=fit`
     }
   }
 
-  return url;
-};
+  return url
+}
 
 export const generateUrl = (sourceUrl, large = false) => {
   const url = large
@@ -37,16 +38,16 @@ export const generateUrl = (sourceUrl, large = false) => {
         sourceUrl,
         window.innerWidth < window.innerHeight
           ? window.innerWidth
-          : window.innerHeight
+          : window.innerHeight,
       )
-    : sourceUrl;
+    : sourceUrl
 
   if (process.env.REACT_APP_IMAGE_CDN_URL) {
     return url.replace(
       'https://upload.wikimedia.org/wikipedia/',
-      process.env.REACT_APP_IMAGE_CDN_URL
-    );
+      process.env.REACT_APP_IMAGE_CDN_URL,
+    )
   }
 
-  return url;
-};
+  return url
+}

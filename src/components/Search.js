@@ -1,36 +1,36 @@
-import { mdiGithub } from '@mdi/js';
-import Icon from '@mdi/react';
-import { liteClient } from 'algoliasearch/lite';
-import React, { useContext } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { mdiGithub } from '@mdi/js'
+import Icon from '@mdi/react'
+import { liteClient } from 'algoliasearch/lite'
+import { useContext } from 'react'
+import { Helmet } from 'react-helmet-async'
 import {
   InstantSearch,
   SearchBox,
   PoweredBy,
   Configure,
-} from 'react-instantsearch';
-import { Outlet } from 'react-router';
+} from 'react-instantsearch'
+import { Outlet } from 'react-router'
 
-import { PageContext } from '../contexts/PageContext';
+import { PageContext } from '../contexts/PageContext'
 
-import PageContent from './PageContent';
+import PageContent from './PageContent'
 
-import '@fontsource/hind';
-import './Search.css';
+import '@fontsource/hind'
+import './Search.css'
 
-let searchClient;
+let searchClient
 
 if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
   const algoliaClient = liteClient(
     process.env.REACT_APP_ALGOLIA_APP_ID,
-    process.env.REACT_APP_ALGOLIA_API_KEY
-  );
+    process.env.REACT_APP_ALGOLIA_API_KEY,
+  )
   searchClient = {
     ...algoliaClient,
     search(requests) {
       if (
-        window?.__EMBLEM_DATA__ &&
-        requests.every(({ params }) => !params.query)
+        window?.__EMBLEM_DATA__
+        && requests.every(({ params }) => !params.query)
       ) {
         return Promise.resolve({
           results: requests.map(() => ({
@@ -44,43 +44,44 @@ if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
             query: '',
             params: '',
           })),
-        });
+        })
       }
 
-      return algoliaClient.search(requests);
+      return algoliaClient.search(requests)
     },
-  };
-} else if (process.env.REACT_APP_SEARCH_SERVICE === 'custom') {
+  }
+}
+else if (process.env.REACT_APP_SEARCH_SERVICE === 'custom') {
   searchClient = {
-    search: (requests) =>
+    search: requests =>
       fetch(`${process.env.REACT_APP_CUSTOM_SEARCH_URL}/search`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ requests }),
-      }).then((res) => res.json()),
-  };
+      }).then(res => res.json()),
+  }
 }
 
-let timerId = undefined;
-const timeout = 500;
+let timerId = undefined
+const timeout = 500
 
 const Search = () => {
-  const { hidePage } = useContext(PageContext);
+  const { hidePage } = useContext(PageContext)
 
   const queryHook = (query, search) => {
     if (timerId) {
-      clearTimeout(timerId);
+      clearTimeout(timerId)
     }
 
-    timerId = setTimeout(() => search(query), timeout);
-  };
+    timerId = setTimeout(() => search(query), timeout)
+  }
 
   const onFocus = () => {
-    delete window.__EMBLEM_DATA__;
-    hidePage();
-  };
+    delete window.__EMBLEM_DATA__
+    hidePage()
+  }
 
   return (
     <InstantSearch
@@ -142,7 +143,7 @@ const Search = () => {
               </g>
             </svg>
           )}
-          placeholder={'Parti, de gueules, Toulouse...'}
+          placeholder="Parti, de gueules, Toulouse..."
           queryHook={queryHook}
           onFocus={onFocus}
         />
@@ -165,7 +166,7 @@ const Search = () => {
       </div>
       <Outlet />
     </InstantSearch>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search
