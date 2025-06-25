@@ -1,7 +1,6 @@
 # heraldry-search-front
-Front French armorial, linked with [heraldry-crawler](https://github.com/bertrandda/heraldry-crawler) project.
 
-_This project was originally generated with [create-instantsearch-app](https://github.com/algolia/create-instantsearch-app) by [Algolia](https://algolia.com)._
+A web app to search French armorial data (cities, villages, families), powered by [heraldry-crawler](https://github.com/bertrandda/heraldry-crawler) and [Algolia](https://algolia.com).
 
 ## Features
 - 📖 Data from Wikipedia armorials [heraldry-crawler](https://github.com/bertrandda/heraldry-crawler)
@@ -12,7 +11,8 @@ _This project was originally generated with [create-instantsearch-app](https://g
 - 🔍 Simple and powerful search by [Algolia](https://algolia.com)
 
 ## Get started
-Create `.env` file from `.env.sample` and complete it with the Algolia app settings in your [console](https://www.algolia.com/users/sign_inhttps://www.algolia.com/users/sign_in).
+
+1. Create `.env` file from `.env.sample` and complete it with the Algolia app settings in your [console](https://www.algolia.com/users/sign_in).
 
 ```sh
 REACT_APP_SEARCH_SERVICE=     # Search service `algolia` OR `custom`
@@ -22,18 +22,22 @@ REACT_APP_ALGOLIA_INDEX=      # Algolia index name
 REACT_APP_CUSTOM_SEARCH_URL=  # if `custom` search service, heraldry-crawler server url
 ```
 
-To run this project locally, install the dependencies and run the local server:
+2. Install dependencies and start the app:
 
 ```sh
 npm install
 npm start
-```
-
-Alternatively, you may use [Yarn](https://http://yarnpkg.com/):
-
-```sh
+# or
 yarn
 yarn start
 ```
 
-Open http://localhost:3000 to see your app.
+3. Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+## Contributing
+
+Pull requests are welcome!
+
+## License
+
+[MIT](LICENSE)
