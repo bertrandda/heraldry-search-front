@@ -25,7 +25,7 @@ export const generateUrlWithPadding = (sourceUrl, width, height) => {
     url = url.replace('https://upload.wikimedia.org/wikipedia/', '')
 
     if (width || height) {
-      url = `${url}?w=${width || height}&h=${height || width}&func=fit`
+      url = `${url}?${cdnParams(cdnUrl, width, height)}`
     }
   }
 
@@ -50,4 +50,14 @@ export const generateUrl = (sourceUrl, large = false) => {
   }
 
   return url
+}
+
+const cdnParams = (cdnUrl, width, height) => {
+  if (cdnUrl.includes('cloudimg.io')) {
+    return `w=${width || height}&h=${height || width}&func=fit`
+  }
+
+  if (cdnUrl.includes('twic.pics')) {
+    return `inside=${width || height}x${height || width}`
+  }
 }
