@@ -58,6 +58,6 @@ const cdnParams = (cdnUrl, width, height) => {
   }
 
   if (cdnUrl.includes('twic.pics')) {
-    return `inside=${width || height}x${height || width}`
+    return `twic=v1/inside=${width || height}x${height || width}(10p)`
   }
 }
