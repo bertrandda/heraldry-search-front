@@ -67,29 +67,6 @@ registerRoute(
   }),
 )
 
-// Cache external images (Cloudimg, Twic.pics)
-registerRoute(
-  ({ url }) =>
-    url.origin.includes('cloudimg.io') || url.origin.includes('twic.pics') || url.origin.includes('wikimedia.org'),
-  new StaleWhileRevalidate({
-    cacheName: 'external-images',
-    plugins: [
-      new ExpirationPlugin({ maxEntries: 100, maxAgeSeconds: 86400 * 30 }), // 30 jours
-    ],
-  }),
-)
-
-// Cache fonts
-registerRoute(
-  ({ url }) => url.pathname.includes('/fonts/'),
-  new StaleWhileRevalidate({
-    cacheName: 'fonts',
-    plugins: [
-      new ExpirationPlugin({ maxEntries: 20, maxAgeSeconds: 86400 * 365 }), // 1 an
-    ],
-  }),
-)
-
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener('message', (event) => {
