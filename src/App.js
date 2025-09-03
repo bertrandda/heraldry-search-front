@@ -1,12 +1,13 @@
 import { mdiFormatListText, mdiMap } from '@mdi/js'
 import Icon from '@mdi/react'
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { Link, Outlet } from 'react-router'
 
-import EmblemModal from './components/EmblemModal'
-import Maps from './components/Maps'
-import Search from './components/Search'
+const EmblemModal = lazy(() => import('./components/EmblemModal'))
+const Maps = lazy(() => import('./components/Maps'))
+const Search = lazy(() => import('./components/Search'))
+
 import { ModalContextProvider } from './contexts/ModalContext'
 import { PageContextProvider } from './contexts/PageContext'
 
@@ -58,9 +59,11 @@ const App = ({ page }) => {
       <HelmetProvider>
         <PageContextProvider emblemInfo={window.__EMBLEM_DATA__}>
           <ModalContextProvider>
-            {page === 'search' && <Search />}
-            {page === 'maps' && <Maps />}
-            <EmblemModal />
+            <Suspense fallback={<div className="loading-placeholder">Chargement...</div>}>
+              {page === 'search' && <Search />}
+              {page === 'maps' && <Maps />}
+              <EmblemModal />
+            </Suspense>
           </ModalContextProvider>
         </PageContextProvider>
       </HelmetProvider>
