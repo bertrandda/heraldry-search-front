@@ -62,7 +62,30 @@ registerRoute(
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
       // least-recently used images are removed.
-      new ExpirationPlugin({ maxEntries: 50 }),
+      new ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 86400 * 7 }), // 7 jours
+    ],
+  }),
+)
+
+// Cache external images (Cloudimg, Twic.pics)
+registerRoute(
+  ({ url }) =>
+    url.origin.includes('cloudimg.io') || url.origin.includes('twic.pics') || url.origin.includes('wikimedia.org'),
+  new StaleWhileRevalidate({
+    cacheName: 'external-images',
+    plugins: [
+      new ExpirationPlugin({ maxEntries: 100, maxAgeSeconds: 86400 * 30 }), // 30 jours
+    ],
+  }),
+)
+
+// Cache fonts
+registerRoute(
+  ({ url }) => url.pathname.includes('/fonts/'),
+  new StaleWhileRevalidate({
+    cacheName: 'fonts',
+    plugins: [
+      new ExpirationPlugin({ maxEntries: 20, maxAgeSeconds: 86400 * 365 }), // 1 an
     ],
   }),
 )

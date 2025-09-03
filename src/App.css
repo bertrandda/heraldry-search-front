@@ -2,6 +2,16 @@
 height: 100%;
 }
 
+.loading-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-family: 'Hind', sans-serif;
+  color: #5f6369;
+  font-size: 1.1em;
+}
+
 .header-type-container {
   z-index: 500;
   position: absolute;

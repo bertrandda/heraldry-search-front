@@ -1,7 +1,7 @@
 import { mdiGithub } from '@mdi/js'
 import Icon from '@mdi/react'
 import { liteClient } from 'algoliasearch/lite'
-import { useContext } from 'react'
+import { useContext, useMemo, useCallback } from 'react'
 import { Helmet } from 'react-helmet-async'
 import {
   InstantSearch,
@@ -18,70 +18,71 @@ import PageContent from './PageContent'
 import '@fontsource/hind'
 import './Search.css'
 
-let searchClient
-
-if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
-  const algoliaClient = liteClient(
-    process.env.REACT_APP_ALGOLIA_APP_ID,
-    process.env.REACT_APP_ALGOLIA_API_KEY,
-  )
-  searchClient = {
-    ...algoliaClient,
-    search(requests) {
-      if (
-        window?.__EMBLEM_DATA__
-        && requests.every(({ params }) => !params.query)
-      ) {
-        return Promise.resolve({
-          results: requests.map(() => ({
-            hits: [],
-            nbHits: 0,
-            nbPages: 0,
-            page: 0,
-            processingTimeMS: 0,
-            hitsPerPage: 0,
-            exhaustiveNbHits: false,
-            query: '',
-            params: '',
-          })),
-        })
-      }
-
-      return algoliaClient.search(requests)
-    },
-  }
-}
-else if (process.env.REACT_APP_SEARCH_SERVICE === 'custom') {
-  searchClient = {
-    search: requests =>
-      fetch(`${process.env.REACT_APP_CUSTOM_SEARCH_URL}/search`, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ requests }),
-      }).then(res => res.json()),
-  }
-}
-
 let timerId = undefined
 const timeout = 500
 
 const Search = () => {
   const { hidePage } = useContext(PageContext)
 
-  const queryHook = (query, search) => {
+  const searchClient = useMemo(() => {
+    if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
+      const algoliaClient = liteClient(
+        process.env.REACT_APP_ALGOLIA_APP_ID,
+        process.env.REACT_APP_ALGOLIA_API_KEY,
+      )
+      return {
+        ...algoliaClient,
+        search(requests) {
+          if (
+            window?.__EMBLEM_DATA__
+            && requests.every(({ params }) => !params.query)
+          ) {
+            return Promise.resolve({
+              results: requests.map(() => ({
+                hits: [],
+                nbHits: 0,
+                nbPages: 0,
+                page: 0,
+                processingTimeMS: 0,
+                hitsPerPage: 0,
+                exhaustiveNbHits: false,
+                query: '',
+                params: '',
+              })),
+            })
+          }
+
+          return algoliaClient.search(requests)
+        },
+      }
+    }
+    else if (process.env.REACT_APP_SEARCH_SERVICE === 'custom') {
+      return {
+        search: requests =>
+          fetch(`${process.env.REACT_APP_CUSTOM_SEARCH_URL}/search`, {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ requests }),
+          }).then(res => res.json()),
+      }
+    }
+    return null
+  }, [])
+
+  const queryHook = useCallback((query, search) => {
     if (timerId) {
       clearTimeout(timerId)
     }
 
     timerId = setTimeout(() => search(query), timeout)
-  }
+  }, [])
 
-  const onFocus = () => {
+  const onFocus = useCallback(() => {
     delete window.__EMBLEM_DATA__
     hidePage()
-  }
+  }, [hidePage])
 
   return (
     <InstantSearch

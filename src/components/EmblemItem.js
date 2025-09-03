@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
-import { useContext, useRef } from 'react'
+import { useContext, useRef, memo } from 'react'
 import { Link } from 'react-router'
 
 import { ModalContext } from '../contexts/ModalContext'
 import { generateUrl } from '../helpers/image'
 import './EmblemItem.css'
 
-const EmblemItem = ({ hit = {}, zoom = {} }) => {
+const EmblemItem = memo(({ hit = {}, zoom = {} }) => {
   const zoomRef = useRef(zoom)
   const { showModal } = useContext(ModalContext)
 
@@ -26,6 +26,8 @@ const EmblemItem = ({ hit = {}, zoom = {} }) => {
           src={generateUrl(hit.imageUrl)}
           data-zoom-src={generateUrl(hit.imageUrl, true)}
           alt={`Armoiries ${hit.name}`}
+          loading="lazy"
+          decoding="async"
           ref={attachZoom}
         />
       </div>
@@ -40,7 +42,7 @@ const EmblemItem = ({ hit = {}, zoom = {} }) => {
       </Link>
     </article>
   )
-}
+})
 
 EmblemItem.propTypes = {
   hit: PropTypes.object,

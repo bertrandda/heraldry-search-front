@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start:ssr": "netlify dev",
-    "build": "react-scripts build",
+    "build": "react-scripts build && node scripts/optimize-build.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix"
   },

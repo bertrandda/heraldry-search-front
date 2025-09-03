@@ -111,6 +111,8 @@ const EmblemContent = ({ emblemData = {} }) => {
           )
         }
         alt={`Armoiries ${emblemData.name}`}
+        loading="eager"
+        decoding="async"
       />
       {emblemData.credits && (
         <div className="credit-wikipedia-modal">
