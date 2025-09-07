@@ -1,4 +1,4 @@
-import { mdiGithub } from '@mdi/js'
+import { mdiFilter, mdiGithub } from '@mdi/js'
 import Icon from '@mdi/react'
 import { liteClient } from 'algoliasearch/lite'
 import { useContext, useMemo, useCallback } from 'react'
@@ -8,6 +8,7 @@ import {
   SearchBox,
   PoweredBy,
   Configure,
+  RefinementList,
 } from 'react-instantsearch'
 import { Outlet } from 'react-router'
 
@@ -15,11 +16,20 @@ import { PageContext } from '../contexts/PageContext'
 
 import PageContent from './PageContent'
 
+import translation from '../assets/translation.json'
+
 import '@fontsource/hind'
 import './Search.css'
 
 let timerId = undefined
 const timeout = 500
+
+const transformFilters = (items) => {
+  return items.map(item => ({
+    ...item,
+    label: translation.fr[item.label],
+  }))
+}
 
 const Search = () => {
   const { hidePage } = useContext(PageContext)
@@ -153,6 +163,11 @@ const Search = () => {
       </header>
 
       <div className="container">
+        <div className="refinement-list">
+          <Icon className="refinement-list-icon" path={mdiFilter} size={1} />
+          <RefinementList attribute="country" sortBy={['name']} transformItems={transformFilters} />
+          <RefinementList attribute="armorial" sortBy={['name']} transformItems={transformFilters} />
+        </div>
         <PageContent />
         <div className="link-github">
           <a
