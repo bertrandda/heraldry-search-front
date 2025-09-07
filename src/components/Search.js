@@ -1,4 +1,4 @@
-import { mdiFilter, mdiGithub } from '@mdi/js'
+import { mdiGithub } from '@mdi/js'
 import Icon from '@mdi/react'
 import { liteClient } from 'algoliasearch/lite'
 import { useContext, useMemo, useCallback } from 'react'
@@ -164,9 +164,7 @@ const Search = () => {
 
       <div className="container">
         <div className="refinement-list">
-          <Icon className="refinement-list-icon" path={mdiFilter} size={1} />
           <RefinementList attribute="country" sortBy={['name']} transformItems={transformFilters} />
-          <RefinementList attribute="armorial" sortBy={['name']} transformItems={transformFilters} />
         </div>
         <PageContent />
         <div className="link-github">

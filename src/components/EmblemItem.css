@@ -1,3 +1,7 @@
+.emblem-item-link {
+  text-decoration: none;
+}
+
 .emblem-container {
   display: flex;
 }
@@ -22,7 +26,6 @@
   position: relative;
   overflow: hidden;
   color: #3a4570;
-  text-decoration: none;
 }
 
 .emblem-info-container:hover {

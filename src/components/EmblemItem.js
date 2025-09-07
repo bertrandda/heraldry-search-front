@@ -1,52 +1,46 @@
 import PropTypes from 'prop-types'
-import { useContext, useRef, memo } from 'react'
+import { useContext, memo } from 'react'
 import { Link } from 'react-router'
 
 import { ModalContext } from '../contexts/ModalContext'
 import { generateUrl } from '../helpers/image'
 import './EmblemItem.css'
 
-const EmblemItem = memo(({ hit = {}, zoom = {} }) => {
-  const zoomRef = useRef(zoom)
+const EmblemItem = memo(({ hit = {} }) => {
   const { showModal } = useContext(ModalContext)
-
-  const attachZoom = (image) => {
-    zoomRef.current.attach(image)
-  }
 
   const clickItem = (emblem) => {
     showModal(emblem)
   }
 
   return (
-    <article className="emblem-container">
-      <div className="emblem-image-container">
-        <img
-          className="emblem-image"
-          src={generateUrl(hit.imageUrl)}
-          data-zoom-src={generateUrl(hit.imageUrl, true)}
-          alt={`Armoiries ${hit.name}`}
-          loading="lazy"
-          decoding="async"
-          ref={attachZoom}
-        />
-      </div>
-      <Link
-        className="emblem-info-container"
-        role="button"
-        tabIndex={0}
-        onClick={() => clickItem(hit)}
-      >
-        <h2 className="emblem-title">{hit.name}</h2>
-        <p className="emblem-description">{hit.descriptionText}</p>
-      </Link>
-    </article>
+    <Link
+      className="emblem-item-link"
+      role="button"
+      tabIndex={0}
+      onClick={() => clickItem(hit)}
+    >
+      <article className="emblem-container">
+        <div className="emblem-image-container">
+          <img
+            className="emblem-image"
+            src={generateUrl(hit.imageUrl)}
+            alt={`Armoiries ${hit.name}`}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div className="emblem-info-container">
+          <h2 className="emblem-title">{hit.name}</h2>
+          <p className="emblem-description">{hit.descriptionText}</p>
+        </div>
+      </article>
+    </Link>
   )
 })
 
 EmblemItem.propTypes = {
   hit: PropTypes.object,
-  zoom: PropTypes.object,
 }
 
 export default EmblemItem
