@@ -111,25 +111,26 @@
   color: #606060;
 }
 
-.ais-RefinementList-item {
-  padding: 2px 5px;
-  margin: 5px;
+.ais-RefinementList-label {
+  padding: 3px 7px;
+  margin: 3px;
   border-radius: 5px;
   background: #ededed
 }
 
-.ais-RefinementList-item:hover {
+.ais-RefinementList-label:hover {
   background: #d6d6d6;
   cursor: pointer;
 }
 
-.ais-RefinementList-item--selected {
+.ais-RefinementList-item--selected .ais-RefinementList-label {
   background: #c4c4c4;
 }
 
-.ais-RefinementList-item--selected::after {
+.ais-RefinementList-item--selected .ais-RefinementList-label::after {
   content: ' ✕';
-  font-size: small;
+  font-size: 0.7rem;
+  vertical-align: text-bottom;
 }
 
 .ais-RefinementList-checkbox {
