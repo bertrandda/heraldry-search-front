@@ -103,12 +103,16 @@
   cursor: inherit;
 }
 
+.ais-RefinementList-labelText {
+  font-size: 0.8rem;
+}
+
 .refinement-list-icon {
   color: #606060;
 }
 
 .ais-RefinementList-item {
-  padding: 5px;
+  padding: 2px 5px;
   margin: 5px;
   border-radius: 5px;
   background: #ededed
