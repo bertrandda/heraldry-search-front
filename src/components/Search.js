@@ -23,11 +23,12 @@ import './Search.css'
 
 let timerId = undefined
 const timeout = 500
+const indexName = process.env.REACT_APP_ALGOLIA_INDEX
 
 const transformFilters = (items) => {
   return items.map(item => ({
     ...item,
-    label: translation.fr[item.label],
+    label: translation.fr[item.label] || item.label,
   }))
 }
 
@@ -97,7 +98,14 @@ const Search = () => {
   return (
     <InstantSearch
       searchClient={searchClient}
-      indexName={process.env.REACT_APP_ALGOLIA_INDEX}
+      indexName={indexName}
+      initialUiState={{
+        [indexName]: {
+          refinementList: {
+            country: ['france'],
+          },
+        },
+      }}
     >
       <Helmet>
         <title>Armorial de France</title>
@@ -128,7 +136,10 @@ const Search = () => {
       </Helmet>
       <header className="header">
         <div className="header-title-container">
-          <h1 className="header-title">Armorial de France</h1>
+          <h1 className="header-title">
+            Armorial de France
+            <span className="header-title-ext">et d&apos;Europe</span>
+          </h1>
           <p className="header-subtitle">Villes, villages et familles</p>
         </div>
         <SearchBox

@@ -71,8 +71,8 @@ const Maps = () => {
       const map = L.map('map', {
         zoomControl: false,
         maxBounds: [
-          [41, -5.3],
-          [51.3, 9.8],
+          [35, -11.6],
+          [75, 42],
         ],
       }).setView(
         [searchParams.get('lat') || 47.5, searchParams.get('lng') || 2.3522],

@@ -29,6 +29,13 @@
   font-weight: normal;
 }
 
+.header-title-ext {
+  display: block;
+  font-size: 1.5rem;
+  margin-top: 0.2rem;
+  font-weight: normal;
+}
+
 .header-subtitle {
   font-size: 1rem;
   margin: 0;
@@ -97,21 +104,24 @@
 
 .ais-RefinementList-list {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ais-RefinementList-item {
+  margin: 3px;
 }
 
 .ais-RefinementList-label {
   cursor: inherit;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: #ededed;
+  white-space: nowrap;
 }
 
 .ais-RefinementList-labelText {
   font-size: 0.8rem;
-}
-
-.ais-RefinementList-label {
-  padding: 3px 7px;
-  margin: 3px;
-  border-radius: 5px;
-  background: #ededed
 }
 
 .ais-RefinementList-item--selected .ais-RefinementList-label {
