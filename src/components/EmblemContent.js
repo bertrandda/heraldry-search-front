@@ -17,6 +17,8 @@ import {
 } from '../helpers/image'
 import './EmblemContent.css'
 
+import translation from '../assets/translation.json'
+
 const EmblemContent = ({ emblemData = {} }) => {
   const HOST = window.location.origin
   const PATH = window.location.pathname
@@ -95,6 +97,7 @@ const EmblemContent = ({ emblemData = {} }) => {
         </Helmet>
       )}
       <h2 className="emblem-title-modal">{emblemData.name}</h2>
+      <div className="emblem-country-modal">{translation.fr[emblemData.country] || emblemData.country}</div>
       <img
         className="emblem-image-modal"
         src={

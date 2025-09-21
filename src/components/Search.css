@@ -8,14 +8,11 @@
   background: linear-gradient(rgba(114, 91, 83, 0.4), rgba(50, 25, 17, 0.6)),
     url(../assets/cover.jpg);
   background: linear-gradient(rgba(114, 91, 83, 0.4), rgba(50, 25, 17, 0.6)),
-    -webkit-image-set(
-      url(../assets/cover.webp) 1x);
+    -webkit-image-set(url(../assets/cover.webp) 1x);
   background: linear-gradient(rgba(114, 91, 83, 0.4), rgba(50, 25, 17, 0.6)),
-    image-set(
-      url(../assets/cover.avif) type("image/avif"),
+    image-set(url(../assets/cover.avif) type("image/avif"),
       url(../assets/cover.webp) type("image/webp"),
-      url(../assets/cover.jpg) type("image/jpeg")
-    );
+      url(../assets/cover.jpg) type("image/jpeg"));
   background-size: cover;
   color: #fff;
   margin-bottom: 1rem;
@@ -32,6 +29,13 @@
   font-weight: normal;
 }
 
+.header-title-ext {
+  display: block;
+  font-size: 1.5rem;
+  margin-top: 0.2rem;
+  font-weight: normal;
+}
+
 .header-subtitle {
   font-size: 1rem;
   margin: 0;
@@ -43,7 +47,7 @@
 }
 
 .search-panel__results {
-  padding-top: 5rem;
+  padding-top: 2rem;
 }
 
 .searchbox {
@@ -91,6 +95,58 @@
   transform: translateX(13%) translateY(15%);
 }
 
+.refinement-list {
+  display: flex;
+  margin-top: 5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.ais-RefinementList-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ais-RefinementList-item {
+  margin: 3px;
+}
+
+.ais-RefinementList-label {
+  cursor: inherit;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: #ededed;
+  white-space: nowrap;
+}
+
+.ais-RefinementList-labelText {
+  font-size: 0.8rem;
+}
+
+.ais-RefinementList-item--selected .ais-RefinementList-label {
+  background: #c4c4c4;
+}
+
+.ais-RefinementList-item--selected .ais-RefinementList-label::after {
+  content: ' ✕';
+  font-size: 0.7rem;
+  vertical-align: text-bottom;
+}
+
+.ais-RefinementList-label:hover {
+  background: #d6d6d6;
+  cursor: pointer;
+}
+
+.ais-RefinementList-checkbox {
+  display: none;
+}
+
+.ais-RefinementList-count {
+  display: none;
+}
+
 .link-github {
   text-align: center;
   margin-top: 30px;
@@ -111,8 +167,12 @@
     margin-right: 10%;
   }
 
+  .refinement-list {
+    margin-top: 3rem;
+  }
+
   .search-panel__results {
-    padding-top: 4rem;
+    padding-top: 2rem;
   }
 }
 
@@ -137,7 +197,11 @@
     transform: translate(calc(418px - 100px), 50%);
   }
 
+  .refinement-list {
+    margin-top: 0rem;
+  }
+
   .search-panel__results {
-    padding-top: 3rem;
+    padding-top: 2rem;
   }
 }
