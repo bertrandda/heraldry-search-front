@@ -1,20 +1,33 @@
 import PropTypes from 'prop-types'
-import { useHits } from 'react-instantsearch'
+import { useHits, useInstantSearch } from 'react-instantsearch'
 
-import EmblemItem from './EmblemItem'
+import EmblemItem, { SkeletonItem } from './EmblemItem'
+
+const HITS_PER_PAGE = 18
 
 const Hits = ({ hits = [] }) => {
+  const { status } = useInstantSearch()
+  const showSkeleton = (status === 'loading' || status === 'stalled') && hits.length === 0
+
+  const items = showSkeleton
+    ? Array.from({ length: HITS_PER_PAGE }, (_, i) => (
+        <div key={`skeleton-${i}`} className="ais-Hits-item">
+          <SkeletonItem />
+        </div>
+      ))
+    : hits.map(hit => (
+        <div
+          key={`${hit.objectID || hit.emblemId}-${hit.name}-item`}
+          className="ais-Hits-item"
+        >
+          <EmblemItem hit={hit} />
+        </div>
+      ))
+
   return (
     <div className="ais-Hits">
       <div className="ais-Hits-list">
-        {hits.map(hit => (
-          <div
-            key={`${hit.objectID || hit.emblemId}-${hit.name}-item`}
-            className="ais-Hits-item"
-          >
-            <EmblemItem hit={hit} />
-          </div>
-        ))}
+        {items}
       </div>
     </div>
   )

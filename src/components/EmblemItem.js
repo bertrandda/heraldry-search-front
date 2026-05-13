@@ -43,4 +43,15 @@ EmblemItem.propTypes = {
   hit: PropTypes.object,
 }
 
+export const SkeletonItem = () => (
+  <div className="emblem-container emblem-skeleton-item">
+    <div className="emblem-image-container emblem-skeleton-block" />
+    <div className="emblem-info-container emblem-skeleton-info">
+      <div className="emblem-skeleton-block emblem-skeleton-title-line" />
+      <div className="emblem-skeleton-block emblem-skeleton-desc-line" />
+      <div className="emblem-skeleton-block emblem-skeleton-desc-line" />
+    </div>
+  </div>
+)
+
 export default EmblemItem
