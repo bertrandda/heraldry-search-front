@@ -71,3 +71,36 @@
   margin: 0;
   text-align: center;
 }
+
+@keyframes emblem-skeleton-shimmer {
+  0% { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+.emblem-skeleton-item {
+  pointer-events: none;
+}
+
+.emblem-skeleton-block {
+  background: linear-gradient(90deg, #ececec 25%, #d8d8d8 50%, #ececec 75%);
+  background-size: 1200px 100%;
+  animation: emblem-skeleton-shimmer 1.5s infinite linear;
+  border-radius: 4px;
+  margin: 10px;
+}
+
+.emblem-skeleton-info::after {
+  display: none;
+}
+
+.emblem-skeleton-title-line {
+  height: 0.9rem;
+  width: 55%;
+  margin-bottom: 10px;
+}
+
+.emblem-skeleton-desc-line {
+  height: 0.75rem;
+  width: 90%;
+  margin-bottom: 8px;
+}

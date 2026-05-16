@@ -147,6 +147,14 @@
   display: none;
 }
 
+.ais-RefinementList-skeleton-pill {
+  height: 24px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #ececec 25%, #d8d8d8 50%, #ececec 75%);
+  background-size: 1200px 100%;
+  animation: emblem-skeleton-shimmer 1.5s infinite linear;
+}
+
 .link-github {
   text-align: center;
   margin-top: 30px;

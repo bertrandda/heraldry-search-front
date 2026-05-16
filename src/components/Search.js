@@ -8,7 +8,7 @@ import {
   SearchBox,
   PoweredBy,
   Configure,
-  RefinementList,
+  useRefinementList,
 } from 'react-instantsearch'
 import { Outlet } from 'react-router'
 
@@ -30,6 +30,47 @@ const transformFilters = (items) => {
     ...item,
     label: translation.fr[item.label] || item.label,
   }))
+}
+
+const REFINEMENT_SKELETON_WIDTHS = [85, 85, 85, 85, 70, 95, 65, 75, 55, 115]
+
+const RefinementListSkeleton = () => (
+  <div className="ais-RefinementList">
+    <ul className="ais-RefinementList-list">
+      {REFINEMENT_SKELETON_WIDTHS.map((w, i) => (
+        <li key={i} className="ais-RefinementList-item">
+          <div
+            className="ais-RefinementList-skeleton-pill"
+            style={{ width: w }}
+          />
+        </li>
+      ))}
+    </ul>
+  </div>
+)
+
+const CustomRefinementList = (props) => {
+  const { items, refine } = useRefinementList(props)
+  const showSkeleton = items.length === 0
+
+  if (showSkeleton) return <RefinementListSkeleton />
+
+  return (
+    <div className="ais-RefinementList">
+      <ul className="ais-RefinementList-list">
+        {items.map(item => (
+          <li
+            key={item.label}
+            className={`ais-RefinementList-item${item.isRefined ? ' ais-RefinementList-item--selected' : ''}`}
+          >
+            <label className="ais-RefinementList-label" onClick={() => refine(item.value)}>
+              <span className="ais-RefinementList-labelText">{item.label}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
 
 const Search = () => {
@@ -175,7 +216,7 @@ const Search = () => {
 
       <div className="container">
         <div className="refinement-list">
-          <RefinementList attribute="country" sortBy={['name']} transformItems={transformFilters} />
+          <CustomRefinementList attribute="country" sortBy={['name']} transformItems={transformFilters} />
         </div>
         <PageContent />
         <div className="link-github">
