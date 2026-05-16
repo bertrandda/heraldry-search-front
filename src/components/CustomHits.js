@@ -5,9 +5,9 @@ import EmblemItem, { SkeletonItem } from './EmblemItem'
 
 const HITS_PER_PAGE = 18
 
-const Hits = ({ hits = [] }) => {
+const Hits = ({ hits = [], results }) => {
   const { status } = useInstantSearch()
-  const showSkeleton = (status === 'loading' || status === 'stalled') && hits.length === 0
+  const showSkeleton = results == null || (status === 'stalled' && hits.length === 0)
 
   const items = showSkeleton
     ? Array.from({ length: HITS_PER_PAGE }, (_, i) => (
