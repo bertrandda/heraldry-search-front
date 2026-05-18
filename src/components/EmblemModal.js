@@ -1,6 +1,6 @@
 import { mdiClose } from '@mdi/js'
 import Icon from '@mdi/react'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import ReactModal from 'react-modal'
 import { useLocation, useNavigate } from 'react-router'
 
@@ -16,21 +16,13 @@ const EmblemModal = () => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
-  const [emblemData, setEmblemData] = useState(
-    modalInfo || window?.__EMBLEM_DATA__,
-  )
+  const emblemData = modalInfo || window?.__EMBLEM_DATA__
 
   useEffect(() => {
     if (modalInfo?.path && pathname !== '/maps') {
       navigate(modalInfo.path)
     }
   }, [modalInfo]) // eslint-disable-line
-
-  useEffect(() => {
-    if (modalInfo) {
-      setEmblemData(modalInfo)
-    }
-  }, [modalInfo])
 
   const closeModal = () => {
     hideModal()

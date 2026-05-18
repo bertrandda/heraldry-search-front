@@ -51,7 +51,7 @@ const RefinementListSkeleton = () => (
 
 const CustomRefinementList = (props) => {
   const { items, refine } = useRefinementList(props)
-  const showSkeleton = items.length === 0
+  const showSkeleton = items.length === 0 && !window?.__EMBLEM_DATA__
 
   if (showSkeleton) return <RefinementListSkeleton />
 

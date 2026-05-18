@@ -13,7 +13,7 @@ export default defineConfig([
       stylistic.configs.recommended,
       react.configs.flat.recommended,
       react.configs.flat['jsx-runtime'],
-      reactHooks.configs['recommended-latest'],
+      reactHooks.configs.flat['recommended-latest'],
     ],
 
     plugins: {
@@ -39,13 +39,13 @@ export default defineConfig([
       },
     },
 
+    settings: {
+      react: {
+        version: '19',
+      },
+    },
+
     rules: {
-      'react/jsx-filename-extension': [
-        1,
-        {
-          extensions: ['.js', '.jsx'],
-        },
-      ],
       'react/prop-types': 'off',
       'react/display-name': 'off',
     },
