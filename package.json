@@ -23,7 +23,7 @@
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-helmet-async": "^3.0.0",
-    "react-instantsearch": "^7.32.3",
+    "react-instantsearch": "^7.33.0",
     "react-modal": "^3.16.3",
     "react-router": "^7.15.1",
     "react-scripts": "5.0.1"
@@ -38,7 +38,7 @@
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jsdoc": "^62.9.0",
+    "eslint-plugin-jsdoc": "^63.0.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react": "^7.37.5",
