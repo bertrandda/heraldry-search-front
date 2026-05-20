@@ -12,11 +12,11 @@ export const generateUrlWithPadding = (sourceUrl, width, height) => {
   let cdnUrl
   let url
   try {
-    cdnUrl = process.env.REACT_APP_IMAGE_CDN_URL || ''
+    cdnUrl = import.meta.env.VITE_IMAGE_CDN_URL || ''
   }
   catch {
     // eslint-disable-next-line no-undef
-    cdnUrl = Deno.env.get('REACT_APP_IMAGE_CDN_URL') || ''
+    cdnUrl = Deno.env.get('VITE_IMAGE_CDN_URL') || ''
   }
 
   url = `${cdnUrl}${sourceUrl}`
@@ -42,10 +42,10 @@ export const generateUrl = (sourceUrl, large = false) => {
       )
     : sourceUrl
 
-  if (process.env.REACT_APP_IMAGE_CDN_URL) {
+  if (import.meta.env.VITE_IMAGE_CDN_URL) {
     return url.replace(
       'https://upload.wikimedia.org/wikipedia/',
-      process.env.REACT_APP_IMAGE_CDN_URL,
+      import.meta.env.VITE_IMAGE_CDN_URL,
     )
   }
 

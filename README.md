@@ -15,11 +15,11 @@ A web app to search French armorial data (cities, villages, families), powered b
 1. Create `.env` file from `.env.sample` and complete it with the Algolia app settings in your [console](https://www.algolia.com/users/sign_in).
 
 ```sh
-REACT_APP_SEARCH_SERVICE=     # Search service `algolia` OR `custom`
-REACT_APP_ALGOLIA_APP_ID=     # Aloglia app ID
-REACT_APP_ALGOLIA_API_KEY=    # Algolia API Key
-REACT_APP_ALGOLIA_INDEX=      # Algolia index name
-REACT_APP_CUSTOM_SEARCH_URL=  # if `custom` search service, heraldry-crawler server url
+VITE_SEARCH_SERVICE=     # Search service `algolia` OR `custom`
+VITE_ALGOLIA_APP_ID=     # Aloglia app ID
+VITE_ALGOLIA_API_KEY=    # Algolia API Key
+VITE_ALGOLIA_INDEX=      # Algolia index name
+VITE_CUSTOM_SEARCH_URL=  # if `custom` search service, heraldry-crawler server url
 ```
 
 2. Install dependencies and start the app:

@@ -23,7 +23,7 @@ import './Search.css'
 
 let timerId = undefined
 const timeout = 500
-const indexName = process.env.REACT_APP_ALGOLIA_INDEX
+const indexName = import.meta.env.VITE_ALGOLIA_INDEX
 
 const transformFilters = (items) => {
   return items.map(item => ({
@@ -77,11 +77,12 @@ const Search = () => {
   const { hidePage } = useContext(PageContext)
 
   const searchClient = useMemo(() => {
-    if (process.env.REACT_APP_SEARCH_SERVICE === 'algolia') {
+    if (import.meta.env.VITE_SEARCH_SERVICE === 'algolia') {
       const algoliaClient = liteClient(
-        process.env.REACT_APP_ALGOLIA_APP_ID,
-        process.env.REACT_APP_ALGOLIA_API_KEY,
+        import.meta.env.VITE_ALGOLIA_APP_ID,
+        import.meta.env.VITE_ALGOLIA_API_KEY,
       )
+
       return {
         ...algoliaClient,
         search(requests) {
@@ -108,10 +109,10 @@ const Search = () => {
         },
       }
     }
-    else if (process.env.REACT_APP_SEARCH_SERVICE === 'custom') {
+    else if (import.meta.env.VITE_SEARCH_SERVICE === 'custom') {
       return {
         search: requests =>
-          fetch(`${process.env.REACT_APP_CUSTOM_SEARCH_URL}/search`, {
+          fetch(`${import.meta.env.VITE_CUSTOM_SEARCH_URL}/search`, {
             method: 'post',
             headers: {
               'Content-Type': 'application/json',
@@ -210,7 +211,7 @@ const Search = () => {
           queryHook={queryHook}
           onFocus={onFocus}
         />
-        {process.env.REACT_APP_SEARCH_SERVICE === 'algolia' && <PoweredBy />}
+        {import.meta.env.VITE_SEARCH_SERVICE === 'algolia' && <PoweredBy />}
         <Configure hitsPerPage={18} />
       </header>
 
