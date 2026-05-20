@@ -77,7 +77,7 @@ const EmblemContent = ({ emblemData = {} }) => {
           <meta
             property="og:image"
             content={`${generateUrlWithPadding(
-              generateLargeUrl(emblemData.imageUrl, 512, false),
+              generateLargeUrl(emblemData.imageUrl, 500, false),
               1200,
               627,
             )}`}
@@ -85,7 +85,7 @@ const EmblemContent = ({ emblemData = {} }) => {
           <meta
             name="twitter:image"
             content={`${generateUrlWithPadding(
-              generateLargeUrl(emblemData.imageUrl, 512, false),
+              generateLargeUrl(emblemData.imageUrl, 500, false),
               700,
               700,
             )}`}
