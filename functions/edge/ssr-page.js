@@ -87,7 +87,7 @@ export default async function handler(req, context) {
     htmlData = htmlData.replaceAll(
       'content="https://armorialdefrance.org/icon-og.png"',
       `content="${generateUrlWithPadding(
-        generateLargeUrl(emblemJson.imageUrl, 512, false),
+        generateLargeUrl(emblemJson.imageUrl, 500, false),
         1200,
         627
       )}"`
@@ -95,7 +95,7 @@ export default async function handler(req, context) {
     htmlData = htmlData.replaceAll(
       'content="https://armorialdefrance.org/icon-twitter.png"',
       `content="${generateUrlWithPadding(
-        generateLargeUrl(emblemJson.imageUrl, 512, false),
+        generateLargeUrl(emblemJson.imageUrl, 500, false),
         700,
         700
       )}"`
