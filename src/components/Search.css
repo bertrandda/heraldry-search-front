@@ -91,8 +91,7 @@
 }
 
 .ais-PoweredBy-logo path:nth-of-type(1) {
-  scale: 0.8;
-  transform: translateX(13%) translateY(15%);
+  transform: translateX(10%) translateY(15%) scale(0.8);
 }
 
 .refinement-list {

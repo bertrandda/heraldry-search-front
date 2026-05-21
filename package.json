@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "vite",
     "start:ssr": "netlify dev",
-    "build": "react-scripts build && node scripts/optimize-build.js",
+    "build": "vite build && node scripts/optimize-build.js",
+    "serve": "vite preview",
     "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -22,11 +23,10 @@
     "leaflet": "^1.9.4",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-helmet-async": "^3.0.0",
+    "react-helmet-async": "^2.0.5",
     "react-instantsearch": "^7.33.0",
     "react-modal": "^3.16.3",
-    "react-router": "^7.15.1",
-    "react-scripts": "5.0.1"
+    "react-router": "^7.15.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.28.6",
@@ -35,6 +35,7 @@
     "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
+    "@vitejs/plugin-react": "^6.0.2",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
@@ -46,11 +47,8 @@
     "globals": "^17.6.0",
     "prettier": "^3.8.3",
     "prop-types": "15.8.1",
-    "workbox-core": "^7.4.1",
-    "workbox-expiration": "^7.4.1",
-    "workbox-precaching": "^7.4.1",
-    "workbox-routing": "^7.4.1",
-    "workbox-strategies": "^7.4.1"
+    "vite": "^8.0.13",
+    "vite-plugin-pwa": "^1.3.0"
   },
   "browserslist": [
     ">0.2%",
