@@ -7,7 +7,7 @@ const HITS_PER_PAGE = 18
 
 const Hits = ({ hits = [], results }) => {
   const { status } = useInstantSearch()
-  const showSkeleton = results == null || (status === 'stalled' && hits.length === 0)
+  const showSkeleton = results === null || (['idle', 'loading', 'stalled'].includes(status) && hits.length === 0 && results?.query === '')
 
   const items = showSkeleton
     ? Array.from({ length: HITS_PER_PAGE }, (_, i) => (
