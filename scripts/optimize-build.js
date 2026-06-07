@@ -18,10 +18,13 @@ function optimizeIndex() {
 
   let html = fs.readFileSync(indexPath, 'utf8')
 
+  // Matches <link rel="stylesheet" [crossorigin] href="..."> in any attribute order (Vite output)
   html = html.replace(
-    /<link href="([^"]*\.css)" rel="stylesheet">/g,
-    '<link href="$1" rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">'
-    + '<noscript><link href="$1" rel="stylesheet"></noscript>',
+    /<link ([^>]*?)rel="stylesheet"([^>]*?)href="([^"]*\.css)"([^>]*)>/g,
+    (_, before, between, href, after) => {
+      const crossorigin = (before + between + after).includes('crossorigin') ? ' crossorigin' : ''
+      return `<link rel="preload" as="style"${crossorigin} href="${href}" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet"${crossorigin} href="${href}"></noscript>`
+    },
   )
 
   fs.writeFileSync(indexPath, html)

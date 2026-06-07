@@ -11,6 +11,7 @@ export default defineConfig(() => {
       react(),
       VitePWA({
         registerType: 'autoUpdate',
+        injectRegister: 'script-defer',
         manifest: {
           short_name: 'heraldry-search-front',
           name: 'Armorial de france',
